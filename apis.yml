@@ -1,7 +1,11 @@
 aid: advance-auto-parts
-url: https://raw.githubusercontent.com/api-evangelist/advance-auto-parts/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/advance-auto-parts/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.advance-auto-parts.com
+description: >-
+  Advance Auto Parts is a leading automotive aftermarket parts retailer serving professional
+  installers and do-it-yourself customers across North America.

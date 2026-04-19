@@ -1,0 +1,11 @@
+{
+  "transactions": [
+    {
+      "id": "txn-001",
+      "type": "earn",
+      "points": 100,
+      "description": "Purchase #order-001",
+      "date": "2026-04-01T10:30:00Z"
+    }
+  ]
+}

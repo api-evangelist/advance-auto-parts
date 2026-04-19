@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order",
+  "description": "A placed order.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Order identifier.",
+      "example": "order-001"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current order status.",
+      "enum": [
+        "pending",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled"
+      ]
+    },
+    "total": {
+      "type": "number",
+      "description": "Order total.",
+      "example": 109.98
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Order creation timestamp."
+    },
+    "items": {
+      "type": "array",
+      "description": "Items in the order.",
+      "items": {
+        "$ref": "#/$defs/CartItem"
+      }
+    }
+  }
+}

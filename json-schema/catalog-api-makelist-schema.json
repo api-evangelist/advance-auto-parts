@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MakeList",
+  "description": "List of vehicle makes.",
+  "type": "object",
+  "properties": {
+    "makes": {
+      "type": "array",
+      "description": "Array of vehicle makes.",
+      "items": {
+        "$ref": "#/$defs/Make"
+      }
+    }
+  }
+}

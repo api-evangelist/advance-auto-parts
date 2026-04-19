@@ -1,0 +1,605 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Commerce API
+  description: >-
+    The Advance Auto Parts Commerce API enables ordering, cart management, loyalty program
+    integration, and order fulfillment for commercial accounts. Supports creating orders, managing
+    Speed Perks loyalty points, tracking shipments, and accessing purchase history for fleet
+    and professional installer accounts.
+  version: "1"
+  contact:
+    name: Advance Auto Parts Commercial Support
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+  - url: https://api.advanceautoparts.com/commerce/v1
+    description: Advance Auto Parts Commerce API Production
+tags:
+  - name: Orders
+    description: Order placement and management
+  - name: Cart
+    description: Shopping cart management
+  - name: Loyalty
+    description: Speed Perks loyalty program
+  - name: Account
+    description: Commercial account management
+security:
+  - oauth2: []
+paths:
+  /cart:
+    get:
+      operationId: getCart
+      summary: Advance Auto Parts Get Current Cart
+      description: "Retrieve the current shopping cart contents for the authenticated session."
+      tags:
+        - Cart
+      responses:
+        '200':
+          description: "Current cart."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                getCart200Example:
+                  summary: Default getCart 200 response
+                  x-microcks-default: true
+                  value:
+                    id: "cart-abc123"
+                    items:
+                      - productId: "SKU-123456"
+                        quantity: 2
+                        unitPrice: 54.99
+                    subtotal: 109.98
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getCart401Example:
+                  summary: Default getCart 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: addToCart
+      summary: Advance Auto Parts Add Item to Cart
+      description: "Add a product to the shopping cart."
+      tags:
+        - Cart
+      requestBody:
+        required: true
+        description: "Item to add to cart."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemInput'
+            examples:
+              addToCartRequestExample:
+                summary: Default addToCart request
+                x-microcks-default: true
+                value:
+                  productId: "SKU-123456"
+                  quantity: 2
+      responses:
+        '200':
+          description: "Updated cart."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                addToCart200Example:
+                  summary: Default addToCart 200 response
+                  x-microcks-default: true
+                  value:
+                    id: "cart-abc123"
+                    items:
+                      - productId: "SKU-123456"
+                        quantity: 2
+                        unitPrice: 54.99
+                    subtotal: 109.98
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                addToCart401Example:
+                  summary: Default addToCart 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders:
+    get:
+      operationId: getOrders
+      summary: Advance Auto Parts List Orders
+      description: "Retrieve order history for the authenticated commercial account."
+      tags:
+        - Orders
+      parameters:
+        - name: startDate
+          in: query
+          required: false
+          description: "Filter orders placed on or after this date (ISO 8601)."
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          required: false
+          description: "Filter orders placed on or before this date (ISO 8601)."
+          schema:
+            type: string
+            format: date-time
+        - name: status
+          in: query
+          required: false
+          description: "Filter by order status."
+          schema:
+            type: string
+            enum: [pending, processing, shipped, delivered, cancelled]
+        - name: limit
+          in: query
+          required: false
+          description: "Maximum number of orders to return."
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          required: false
+          description: "Pagination offset."
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: "Order history."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+              examples:
+                getOrders200Example:
+                  summary: Default getOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    orders:
+                      - id: "order-001"
+                        status: "delivered"
+                        total: 109.98
+                        createdAt: "2026-04-01T10:30:00Z"
+                    total: 1
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getOrders401Example:
+                  summary: Default getOrders 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOrder
+      summary: Advance Auto Parts Create Order
+      description: "Place a new order from the current cart contents."
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        description: "Order creation request."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+            examples:
+              createOrderRequestExample:
+                summary: Default createOrder request
+                x-microcks-default: true
+                value:
+                  cartId: "cart-abc123"
+                  storeId: "store-001"
+                  fulfillmentType: "store-pickup"
+                  paymentMethodId: "pm-001"
+      responses:
+        '201':
+          description: "Order created."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                createOrder201Example:
+                  summary: Default createOrder 201 response
+                  x-microcks-default: true
+                  value:
+                    id: "order-002"
+                    status: "pending"
+                    total: 109.98
+                    createdAt: "2026-04-19T10:00:00Z"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                createOrder401Example:
+                  summary: Default createOrder 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Advance Auto Parts Get Order Details
+      description: "Retrieve details of a specific order including line items, tracking, and status."
+      tags:
+        - Orders
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          description: "Order identifier."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Order details."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                getOrder200Example:
+                  summary: Default getOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    id: "order-001"
+                    status: "delivered"
+                    total: 109.98
+                    createdAt: "2026-04-01T10:30:00Z"
+                    items:
+                      - productId: "SKU-123456"
+                        quantity: 2
+                        unitPrice: 54.99
+        '404':
+          description: "Order not found."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getOrder404Example:
+                  summary: Default getOrder 404 response
+                  x-microcks-default: true
+                  value:
+                    code: "NOT_FOUND"
+                    message: "Order not found"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty/account:
+    get:
+      operationId: getLoyaltyAccount
+      summary: Advance Auto Parts Get Loyalty Account
+      description: "Retrieve Speed Perks loyalty account details including points balance and reward status."
+      tags:
+        - Loyalty
+      responses:
+        '200':
+          description: "Loyalty account details."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoyaltyAccount'
+              examples:
+                getLoyaltyAccount200Example:
+                  summary: Default getLoyaltyAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    accountId: "sp-001"
+                    memberId: "123456789"
+                    pointsBalance: 2500
+                    tier: "Gold"
+                    rewardValue: 5.00
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getLoyaltyAccount401Example:
+                  summary: Default getLoyaltyAccount 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty/transactions:
+    get:
+      operationId: getLoyaltyTransactions
+      summary: Advance Auto Parts Get Loyalty Transactions
+      description: "Retrieve Speed Perks points transaction history for the loyalty account."
+      tags:
+        - Loyalty
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: "Maximum number of transactions to return."
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          required: false
+          description: "Pagination offset."
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: "Points transaction history."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoyaltyTransactionList'
+              examples:
+                getLoyaltyTransactions200Example:
+                  summary: Default getLoyaltyTransactions 200 response
+                  x-microcks-default: true
+                  value:
+                    transactions:
+                      - id: "txn-001"
+                        type: "earn"
+                        points: 100
+                        description: "Purchase #order-001"
+                        date: "2026-04-01T10:30:00Z"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getLoyaltyTransactions401Example:
+                  summary: Default getLoyaltyTransactions 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.advanceautoparts.com/oauth/authorize
+          tokenUrl: https://auth.advanceautoparts.com/oauth/token
+          scopes:
+            catalog:read: "Read product catalog"
+            orders:read: "Read order history"
+            orders:write: "Place and manage orders"
+            loyalty:read: "Read loyalty account"
+  schemas:
+    CartItem:
+      type: object
+      description: "An item in the shopping cart."
+      properties:
+        productId:
+          type: string
+          description: "Product SKU."
+          example: "SKU-123456"
+        quantity:
+          type: integer
+          description: "Quantity of the item."
+          example: 2
+        unitPrice:
+          type: number
+          format: float
+          description: "Price per unit."
+          example: 54.99
+    CartItemInput:
+      type: object
+      description: "Request to add an item to the cart."
+      required:
+        - productId
+        - quantity
+      properties:
+        productId:
+          type: string
+          description: "Product SKU to add."
+          example: "SKU-123456"
+        quantity:
+          type: integer
+          description: "Quantity to add."
+          example: 2
+    Cart:
+      type: object
+      description: "A shopping cart."
+      properties:
+        id:
+          type: string
+          description: "Cart identifier."
+          example: "cart-abc123"
+        items:
+          type: array
+          description: "Items in the cart."
+          items:
+            $ref: '#/components/schemas/CartItem'
+        subtotal:
+          type: number
+          format: float
+          description: "Cart subtotal before tax."
+          example: 109.98
+    OrderInput:
+      type: object
+      description: "Request to create a new order."
+      required:
+        - cartId
+        - fulfillmentType
+      properties:
+        cartId:
+          type: string
+          description: "Cart to convert to an order."
+          example: "cart-abc123"
+        storeId:
+          type: string
+          description: "Store for pickup (required for store-pickup fulfillment)."
+          example: "store-001"
+        fulfillmentType:
+          type: string
+          description: "How to fulfill the order."
+          enum: [store-pickup, same-day-delivery, standard-shipping]
+          example: "store-pickup"
+        paymentMethodId:
+          type: string
+          description: "Payment method identifier."
+          example: "pm-001"
+    Order:
+      type: object
+      description: "A placed order."
+      properties:
+        id:
+          type: string
+          description: "Order identifier."
+          example: "order-001"
+        status:
+          type: string
+          description: "Current order status."
+          enum: [pending, processing, shipped, delivered, cancelled]
+          example: "delivered"
+        total:
+          type: number
+          format: float
+          description: "Order total."
+          example: 109.98
+        createdAt:
+          type: string
+          format: date-time
+          description: "Order creation timestamp."
+          example: "2026-04-01T10:30:00Z"
+        items:
+          type: array
+          description: "Items in the order."
+          items:
+            $ref: '#/components/schemas/CartItem'
+    OrderList:
+      type: object
+      description: "List of orders."
+      properties:
+        orders:
+          type: array
+          description: "Array of orders."
+          items:
+            $ref: '#/components/schemas/Order'
+        total:
+          type: integer
+          description: "Total number of orders."
+          example: 25
+    LoyaltyAccount:
+      type: object
+      description: "A Speed Perks loyalty account."
+      properties:
+        accountId:
+          type: string
+          description: "Loyalty account ID."
+          example: "sp-001"
+        memberId:
+          type: string
+          description: "Member ID number."
+          example: "123456789"
+        pointsBalance:
+          type: integer
+          description: "Current points balance."
+          example: 2500
+        tier:
+          type: string
+          description: "Loyalty tier."
+          enum: [Bronze, Silver, Gold, Platinum]
+          example: "Gold"
+        rewardValue:
+          type: number
+          format: float
+          description: "Dollar value of available rewards."
+          example: 5.00
+    LoyaltyTransaction:
+      type: object
+      description: "A Speed Perks points transaction."
+      properties:
+        id:
+          type: string
+          description: "Transaction ID."
+          example: "txn-001"
+        type:
+          type: string
+          description: "Transaction type."
+          enum: [earn, redeem, expire, adjust]
+          example: "earn"
+        points:
+          type: integer
+          description: "Points earned or redeemed."
+          example: 100
+        description:
+          type: string
+          description: "Transaction description."
+          example: "Purchase #order-001"
+        date:
+          type: string
+          format: date-time
+          description: "Transaction date."
+          example: "2026-04-01T10:30:00Z"
+    LoyaltyTransactionList:
+      type: object
+      description: "List of loyalty transactions."
+      properties:
+        transactions:
+          type: array
+          description: "Array of transactions."
+          items:
+            $ref: '#/components/schemas/LoyaltyTransaction'
+    ErrorResponse:
+      type: object
+      description: "API error response."
+      properties:
+        code:
+          type: string
+          description: "Error code."
+          example: "NOT_FOUND"
+        message:
+          type: string
+          description: "Error message."
+          example: "The requested resource was not found."

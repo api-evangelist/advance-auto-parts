@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "storeinventory-structure.json",
+  "title": "StoreInventory",
+  "description": "Inventory at a specific store.",
+  "type": "object",
+  "properties": {
+    "storeId": {
+      "type": "string",
+      "description": "Store identifier."
+    },
+    "storeName": {
+      "type": "string",
+      "description": "Store name."
+    },
+    "quantity": {
+      "type": "int32",
+      "description": "Available quantity."
+    },
+    "available": {
+      "type": "boolean",
+      "description": "Whether in stock."
+    }
+  }
+}

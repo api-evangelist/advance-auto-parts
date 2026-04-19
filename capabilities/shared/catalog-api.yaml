@@ -1,0 +1,274 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Advance Auto Parts Catalog API"
+  description: "REST API for searching the automotive parts catalog, vehicle fitment lookups, inventory checks, and store location queries."
+  tags:
+    - Advance Auto Parts
+    - Automotive
+    - Parts Catalog
+    - Inventory
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AAP_API_KEY: AAP_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: aap-catalog
+      baseUri: https://api.advanceautoparts.com/v1
+      description: "Advance Auto Parts Catalog REST API."
+      authentication:
+        type: apiKey
+        header: X-API-Key
+        token: "{{AAP_API_KEY}}"
+      resources:
+        - name: vehicle-years
+          path: /vehicles/years
+          description: "Vehicle year lookup."
+          operations:
+            - name: list-vehicle-years
+              method: GET
+              description: "List available vehicle model years."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: vehicle-makes
+          path: /vehicles/makes
+          description: "Vehicle make lookup."
+          operations:
+            - name: list-vehicle-makes
+              method: GET
+              description: "List vehicle makes for a given year."
+              inputParameters:
+                - name: year
+                  in: query
+                  type: integer
+                  required: true
+                  description: "Vehicle model year."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: vehicle-models
+          path: /vehicles/models
+          description: "Vehicle model lookup."
+          operations:
+            - name: list-vehicle-models
+              method: GET
+              description: "List vehicle models for a given year and make."
+              inputParameters:
+                - name: year
+                  in: query
+                  type: integer
+                  required: true
+                  description: "Vehicle model year."
+                - name: makeId
+                  in: query
+                  type: string
+                  required: true
+                  description: "Vehicle make identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: products
+          path: /products
+          description: "Parts catalog search."
+          operations:
+            - name: search-products
+              method: GET
+              description: "Search for automotive parts by keyword or fitment."
+              inputParameters:
+                - name: q
+                  in: query
+                  type: string
+                  required: false
+                  description: "Keyword search query."
+                - name: year
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Vehicle year for fitment."
+                - name: makeId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Vehicle make ID."
+                - name: modelId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Vehicle model ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: product
+          path: /products/{productId}
+          description: "Product detail lookup."
+          operations:
+            - name: get-product
+              method: GET
+              description: "Get full product details."
+              inputParameters:
+                - name: productId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Product SKU."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: inventory
+          path: /inventory
+          description: "Store inventory check."
+          operations:
+            - name: check-inventory
+              method: GET
+              description: "Check product availability at nearby stores."
+              inputParameters:
+                - name: productId
+                  in: query
+                  type: string
+                  required: true
+                  description: "Product SKU."
+                - name: zip
+                  in: query
+                  type: string
+                  required: false
+                  description: "ZIP code for nearby stores."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: stores
+          path: /stores
+          description: "Store location search."
+          operations:
+            - name: get-stores
+              method: GET
+              description: "Find Advance Auto Parts stores near a location."
+              inputParameters:
+                - name: zip
+                  in: query
+                  type: string
+                  required: false
+                  description: "ZIP code to search near."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: aap-catalog-rest
+      resources:
+        - path: /v1/products
+          name: products
+          description: "Parts catalog search."
+          operations:
+            - method: GET
+              name: search-products
+              description: "Search for parts."
+              call: "aap-catalog.search-products"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: aap-catalog-mcp
+      transport: http
+      tools:
+        - name: search-auto-parts
+          description: "Search for automotive parts by keyword, part number, or vehicle fitment."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.search-products"
+          with:
+            q: "tools.q"
+            year: "tools.year"
+            makeId: "tools.makeId"
+            modelId: "tools.modelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-part-details
+          description: "Get full details for an automotive part by SKU or part number."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "aap-catalog.get-product"
+          with:
+            productId: "tools.productId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-part-availability
+          description: "Check availability of a part at nearby Advance Auto Parts stores."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.check-inventory"
+          with:
+            productId: "tools.productId"
+            zip: "tools.zip"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: find-stores
+          description: "Find Advance Auto Parts store locations near a ZIP code."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.get-stores"
+          with:
+            zip: "tools.zip"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: lookup-vehicle-makes
+          description: "Look up vehicle makes available for a given model year."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.list-vehicle-makes"
+          with:
+            year: "tools.year"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: lookup-vehicle-models
+          description: "Look up vehicle models for a given year and make."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.list-vehicle-models"
+          with:
+            year: "tools.year"
+            makeId: "tools.makeId"
+          outputParameters:
+            - type: object
+              mapping: "$."

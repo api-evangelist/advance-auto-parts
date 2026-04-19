@@ -1,0 +1,270 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Advance Auto Parts"
+  description: "Vocabulary for Advance Auto Parts APIs covering automotive parts catalog, vehicle fitment, inventory, ordering, and loyalty programs."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: "Advance Auto Parts Catalog API"
+      namespace: aap-catalog
+      version: "1"
+      baseUrl: https://api.advanceautoparts.com/v1
+      status: active
+    - name: "Advance Auto Parts Commerce API"
+      namespace: aap-commerce
+      version: "1"
+      baseUrl: https://api.advanceautoparts.com/commerce/v1
+      status: active
+
+  resources:
+    - name: vehicle-years
+      api: aap-catalog
+      actions: [list]
+    - name: vehicle-makes
+      api: aap-catalog
+      actions: [list]
+    - name: vehicle-models
+      api: aap-catalog
+      actions: [list]
+    - name: products
+      api: aap-catalog
+      actions: [search, get]
+    - name: inventory
+      api: aap-catalog
+      actions: [check]
+    - name: stores
+      api: aap-catalog
+      actions: [list]
+    - name: cart
+      api: aap-commerce
+      actions: [get, add]
+    - name: orders
+      api: aap-commerce
+      actions: [list, create, get]
+    - name: loyalty-account
+      api: aap-commerce
+      actions: [get]
+    - name: loyalty-transactions
+      api: aap-commerce
+      actions: [list]
+
+  actions:
+    - name: list
+      method: GET
+      pattern: read
+    - name: get
+      method: GET
+      pattern: read
+    - name: search
+      method: GET
+      pattern: query
+    - name: check
+      method: GET
+      pattern: read
+    - name: create
+      method: POST
+      pattern: write
+    - name: add
+      method: POST
+      pattern: write
+
+  schemas:
+    catalog:
+      - YearList
+      - Make
+      - MakeList
+      - VehicleModel
+      - ModelList
+      - Product
+      - ProductList
+      - StoreInventory
+      - InventoryResult
+      - Store
+      - StoreList
+    commerce:
+      - CartItem
+      - CartItemInput
+      - Cart
+      - OrderInput
+      - Order
+      - OrderList
+      - LoyaltyAccount
+      - LoyaltyTransaction
+      - LoyaltyTransactionList
+
+  parameters:
+    identifiers:
+      - productId
+      - storeId
+      - orderId
+    filters:
+      - year
+      - makeId
+      - modelId
+      - categoryId
+      - status
+      - startDate
+      - endDate
+    location:
+      - zip
+      - lat
+      - lon
+      - radius
+    pagination:
+      - limit
+      - offset
+    search:
+      - q
+      - partNumber
+
+  enums:
+    loyaltyTiers:
+      - Bronze
+      - Silver
+      - Gold
+      - Platinum
+    orderStatus:
+      - pending
+      - processing
+      - shipped
+      - delivered
+      - cancelled
+    fulfillmentTypes:
+      - store-pickup
+      - same-day-delivery
+      - standard-shipping
+    transactionTypes:
+      - earn
+      - redeem
+      - expire
+      - adjust
+
+  authentication:
+    schemes:
+      - name: apiKey
+        type: apiKey
+        header: X-API-Key
+        apis: [aap-catalog]
+      - name: oauth2
+        type: oauth2
+        flow: authorizationCode
+        authorizationUrl: https://auth.advanceautoparts.com/oauth/authorize
+        tokenUrl: https://auth.advanceautoparts.com/oauth/token
+        apis: [aap-commerce]
+    scopes:
+      - name: catalog:read
+        description: Read product catalog
+      - name: orders:read
+        description: Read order history
+      - name: orders:write
+        description: Place and manage orders
+      - name: loyalty:read
+        description: Read loyalty account
+
+capability:
+  workflows:
+    - name: auto-parts-shopping
+      file: capabilities/auto-parts-shopping.yaml
+      description: Unified workflow for automotive parts discovery, fitment lookup, inventory, and ordering
+      apis: [aap-catalog, aap-commerce]
+      toolCount: 7
+      personas: [automotive-technician, fleet-manager, diy-customer]
+      domains: [Automotive, E-Commerce, Parts Catalog, Loyalty]
+
+  personas:
+    - id: automotive-technician
+      name: Automotive Technician
+      description: Professional mechanic using the API to source parts for repair jobs
+      workflows: [auto-parts-shopping]
+    - id: fleet-manager
+      name: Fleet Manager
+      description: Fleet operations manager ordering parts for vehicle maintenance programs
+      workflows: [auto-parts-shopping]
+    - id: diy-customer
+      name: DIY Customer
+      description: Do-it-yourself automotive enthusiast sourcing parts for self-repairs
+      workflows: [auto-parts-shopping]
+
+  domains:
+    - name: Automotive
+      resources: [vehicle-years, vehicle-makes, vehicle-models, products]
+    - name: Parts Catalog
+      resources: [products, inventory, stores]
+    - name: E-Commerce
+      resources: [cart, orders]
+    - name: Loyalty
+      resources: [loyalty-account, loyalty-transactions]
+
+  namespaces:
+    consumed:
+      - name: aap-catalog
+        type: http
+        baseUri: https://api.advanceautoparts.com/v1
+      - name: aap-commerce
+        type: http
+        baseUri: https://api.advanceautoparts.com/commerce/v1
+    rest:
+      - namespace: aap-catalog-rest
+        port: 8080
+      - namespace: aap-shopping-api
+        port: 8090
+    mcp:
+      - namespace: aap-catalog-mcp
+        port: 9090
+      - namespace: aap-shopping-mcp
+        port: 9091
+
+  binds:
+    - name: AAP_API_KEY
+      description: API key for Advance Auto Parts Catalog API
+    - name: AAP_OAUTH_TOKEN
+      description: OAuth 2.0 token for Advance Auto Parts Commerce API
+
+crossReference:
+  - resource: products
+    operations:
+      - operationId: searchProducts
+        method: GET
+        path: /products
+      - operationId: getProduct
+        method: GET
+        path: /products/{productId}
+    workflows: [auto-parts-shopping]
+    personas: [automotive-technician, fleet-manager, diy-customer]
+  - resource: inventory
+    operations:
+      - operationId: checkInventory
+        method: GET
+        path: /inventory
+    workflows: [auto-parts-shopping]
+    personas: [automotive-technician, fleet-manager, diy-customer]
+  - resource: stores
+    operations:
+      - operationId: getStores
+        method: GET
+        path: /stores
+    workflows: [auto-parts-shopping]
+    personas: [automotive-technician, fleet-manager, diy-customer]
+  - resource: orders
+    operations:
+      - operationId: getOrders
+        method: GET
+        path: /orders
+      - operationId: createOrder
+        method: POST
+        path: /orders
+      - operationId: getOrder
+        method: GET
+        path: /orders/{orderId}
+    workflows: [auto-parts-shopping]
+    personas: [automotive-technician, fleet-manager]
+  - resource: loyalty-account
+    operations:
+      - operationId: getLoyaltyAccount
+        method: GET
+        path: /loyalty/account
+    workflows: [auto-parts-shopping]
+    personas: [automotive-technician, diy-customer]

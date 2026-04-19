@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "loyaltytransaction-structure.json",
+  "title": "LoyaltyTransaction",
+  "description": "A Speed Perks points transaction.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Transaction ID."
+    },
+    "type": {
+      "type": "string",
+      "description": "Transaction type."
+    },
+    "points": {
+      "type": "int32",
+      "description": "Points earned or redeemed."
+    },
+    "description": {
+      "type": "string",
+      "description": "Transaction description."
+    },
+    "date": {
+      "type": "datetime",
+      "description": "Transaction date."
+    }
+  }
+}

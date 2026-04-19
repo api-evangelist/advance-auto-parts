@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "product-structure.json",
+  "title": "Product",
+  "description": "An automotive part or product.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Product SKU."
+    },
+    "name": {
+      "type": "string",
+      "description": "Product name."
+    },
+    "partNumber": {
+      "type": "string",
+      "description": "Manufacturer part number."
+    },
+    "brand": {
+      "type": "string",
+      "description": "Brand name."
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description."
+    },
+    "price": {
+      "type": "float",
+      "description": "Current retail price."
+    },
+    "available": {
+      "type": "boolean",
+      "description": "Whether available."
+    },
+    "categoryId": {
+      "type": "string",
+      "description": "Product category identifier."
+    }
+  }
+}

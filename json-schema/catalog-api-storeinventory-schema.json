@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoreInventory",
+  "description": "Inventory at a specific store.",
+  "type": "object",
+  "properties": {
+    "storeId": {
+      "type": "string",
+      "description": "Store identifier.",
+      "example": "store-001"
+    },
+    "storeName": {
+      "type": "string",
+      "description": "Store name.",
+      "example": "Advance Auto Parts - Main St"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "Available quantity.",
+      "example": 4
+    },
+    "available": {
+      "type": "boolean",
+      "description": "Whether in stock.",
+      "example": true
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "cartId": "cart-abc123",
+  "storeId": "store-001",
+  "fulfillmentType": "store-pickup",
+  "paymentMethodId": "pm-001"
+}

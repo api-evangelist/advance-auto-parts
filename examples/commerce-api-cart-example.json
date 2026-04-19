@@ -1,0 +1,11 @@
+{
+  "id": "cart-abc123",
+  "items": [
+    {
+      "productId": "SKU-123456",
+      "quantity": 2,
+      "unitPrice": 54.99
+    }
+  ],
+  "subtotal": 109.98
+}

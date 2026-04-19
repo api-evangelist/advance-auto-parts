@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ModelList",
+  "description": "List of vehicle models.",
+  "type": "object",
+  "properties": {
+    "models": {
+      "type": "array",
+      "description": "Array of vehicle models.",
+      "items": {
+        "$ref": "#/$defs/VehicleModel"
+      }
+    }
+  }
+}

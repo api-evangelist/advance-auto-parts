@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "makelist-structure.json",
+  "title": "MakeList",
+  "description": "List of vehicle makes.",
+  "type": "object",
+  "properties": {
+    "makes": {
+      "type": "array",
+      "description": "Array of vehicle makes."
+    }
+  }
+}

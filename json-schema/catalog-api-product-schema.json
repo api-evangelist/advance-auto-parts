@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Product",
+  "description": "An automotive part or product.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Product SKU.",
+      "example": "SKU-123456"
+    },
+    "name": {
+      "type": "string",
+      "description": "Product name.",
+      "example": "Duralast Gold Brake Pad Set"
+    },
+    "partNumber": {
+      "type": "string",
+      "description": "Manufacturer part number.",
+      "example": "MKD1083"
+    },
+    "brand": {
+      "type": "string",
+      "description": "Brand name.",
+      "example": "Duralast Gold"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description."
+    },
+    "price": {
+      "type": "number",
+      "description": "Current retail price.",
+      "example": 54.99
+    },
+    "available": {
+      "type": "boolean",
+      "description": "Whether available.",
+      "example": true
+    },
+    "categoryId": {
+      "type": "string",
+      "description": "Product category identifier.",
+      "example": "brake-pads"
+    }
+  }
+}

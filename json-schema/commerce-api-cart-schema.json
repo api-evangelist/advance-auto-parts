@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cart",
+  "description": "A shopping cart.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Cart identifier.",
+      "example": "cart-abc123"
+    },
+    "items": {
+      "type": "array",
+      "description": "Items in the cart.",
+      "items": {
+        "$ref": "#/$defs/CartItem"
+      }
+    },
+    "subtotal": {
+      "type": "number",
+      "description": "Cart subtotal before tax.",
+      "example": 109.98
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VehicleModel",
+  "description": "A vehicle model.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Model identifier.",
+      "example": "F150"
+    },
+    "name": {
+      "type": "string",
+      "description": "Model display name.",
+      "example": "F-150"
+    }
+  }
+}

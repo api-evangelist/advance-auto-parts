@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "orderinput-structure.json",
+  "title": "OrderInput",
+  "description": "Request to create a new order.",
+  "type": "object",
+  "properties": {
+    "cartId": {
+      "type": "string",
+      "description": "Cart to convert to an order."
+    },
+    "storeId": {
+      "type": "string",
+      "description": "Store for pickup."
+    },
+    "fulfillmentType": {
+      "type": "string",
+      "description": "Fulfillment type."
+    },
+    "paymentMethodId": {
+      "type": "string",
+      "description": "Payment method identifier."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "make-structure.json",
+  "title": "Make",
+  "description": "A vehicle manufacturer.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Make identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Make display name."
+    }
+  }
+}

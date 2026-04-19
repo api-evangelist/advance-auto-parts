@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LoyaltyAccount",
+  "description": "A Speed Perks loyalty account.",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "description": "Loyalty account ID.",
+      "example": "sp-001"
+    },
+    "memberId": {
+      "type": "string",
+      "description": "Member ID number.",
+      "example": "123456789"
+    },
+    "pointsBalance": {
+      "type": "integer",
+      "description": "Current points balance.",
+      "example": 2500
+    },
+    "tier": {
+      "type": "string",
+      "description": "Loyalty tier.",
+      "enum": [
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Platinum"
+      ]
+    },
+    "rewardValue": {
+      "type": "number",
+      "description": "Dollar value of available rewards.",
+      "example": 5.0
+    }
+  }
+}

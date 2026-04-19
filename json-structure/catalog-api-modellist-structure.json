@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "modellist-structure.json",
+  "title": "ModelList",
+  "description": "List of vehicle models.",
+  "type": "object",
+  "properties": {
+    "models": {
+      "type": "array",
+      "description": "Array of vehicle models."
+    }
+  }
+}

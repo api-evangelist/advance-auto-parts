@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "loyaltyaccount-structure.json",
+  "title": "LoyaltyAccount",
+  "description": "A Speed Perks loyalty account.",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "description": "Loyalty account ID."
+    },
+    "memberId": {
+      "type": "string",
+      "description": "Member ID number."
+    },
+    "pointsBalance": {
+      "type": "int32",
+      "description": "Current points balance."
+    },
+    "tier": {
+      "type": "string",
+      "description": "Loyalty tier."
+    },
+    "rewardValue": {
+      "type": "float",
+      "description": "Dollar value of available rewards."
+    }
+  }
+}

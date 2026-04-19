@@ -1,0 +1,156 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Advance Auto Parts Shopping"
+  description: "Unified workflow capability for automotive parts discovery, fitment lookup, inventory checking, ordering, and loyalty management. Designed for automotive technicians, fleet managers, and DIY customers."
+  tags:
+    - Advance Auto Parts
+    - Automotive
+    - E-Commerce
+    - Parts Catalog
+    - Loyalty
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AAP_API_KEY: AAP_API_KEY
+      AAP_OAUTH_TOKEN: AAP_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - import: aap-catalog
+      location: ./shared/catalog-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8090
+      namespace: aap-shopping-api
+      description: "Unified REST API for Advance Auto Parts catalog search, inventory, ordering, and loyalty."
+      resources:
+        - path: /v1/parts
+          name: parts
+          description: "Parts catalog search."
+          operations:
+            - method: GET
+              name: search-parts
+              description: "Search for automotive parts."
+              call: "aap-catalog.search-products"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/parts/{productId}
+          name: part
+          description: "Part details."
+          operations:
+            - method: GET
+              name: get-part
+              description: "Get automotive part details."
+              call: "aap-catalog.get-product"
+              with:
+                productId: "rest.productId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/inventory
+          name: inventory
+          description: "Store inventory."
+          operations:
+            - method: GET
+              name: check-inventory
+              description: "Check part inventory at stores."
+              call: "aap-catalog.check-inventory"
+              with:
+                productId: "rest.productId"
+                zip: "rest.zip"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: aap-shopping-mcp
+      transport: http
+      description: "MCP server for AI-assisted automotive parts shopping — find parts, check availability, and manage orders."
+      tools:
+        - name: search-auto-parts
+          description: "Search for automotive parts by keyword, part number, or vehicle year/make/model."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.search-products"
+          with:
+            q: "tools.q"
+            year: "tools.year"
+            makeId: "tools.makeId"
+            modelId: "tools.modelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-part-details
+          description: "Get full specifications, fitment notes, and pricing for a specific automotive part."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "aap-catalog.get-product"
+          with:
+            productId: "tools.productId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-part-availability
+          description: "Check if an automotive part is in stock at nearby Advance Auto Parts stores."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.check-inventory"
+          with:
+            productId: "tools.productId"
+            zip: "tools.zip"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: find-nearby-stores
+          description: "Find Advance Auto Parts store locations near a ZIP code or city."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.get-stores"
+          with:
+            zip: "tools.zip"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: lookup-vehicle-makes
+          description: "Get available vehicle makes for a given model year for fitment-based part search."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.list-vehicle-makes"
+          with:
+            year: "tools.year"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: lookup-vehicle-models
+          description: "Get available vehicle models for a year and make for fitment-based part search."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.list-vehicle-models"
+          with:
+            year: "tools.year"
+            makeId: "tools.makeId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-vehicle-years
+          description: "Get the range of supported vehicle model years for parts catalog lookups."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "aap-catalog.list-vehicle-years"
+          outputParameters:
+            - type: object
+              mapping: "$."

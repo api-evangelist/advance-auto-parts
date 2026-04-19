@@ -1,0 +1,12 @@
+{
+  "stores": [
+    {
+      "id": "store-001",
+      "name": "Advance Auto Parts - Main St",
+      "address": "123 Main St, Springfield, IL 62701",
+      "phone": "217-555-0100",
+      "hours": "Mon-Sat 7:30AM-9PM, Sun 9AM-8PM",
+      "distance": 1.2
+    }
+  ]
+}

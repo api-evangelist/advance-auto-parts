@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LoyaltyTransactionList",
+  "description": "List of loyalty transactions.",
+  "type": "object",
+  "properties": {
+    "transactions": {
+      "type": "array",
+      "description": "Array of transactions.",
+      "items": {
+        "$ref": "#/$defs/LoyaltyTransaction"
+      }
+    }
+  }
+}

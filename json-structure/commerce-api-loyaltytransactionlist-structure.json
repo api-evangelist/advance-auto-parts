@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "loyaltytransactionlist-structure.json",
+  "title": "LoyaltyTransactionList",
+  "description": "List of loyalty transactions.",
+  "type": "object",
+  "properties": {
+    "transactions": {
+      "type": "array",
+      "description": "Array of transactions."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cart-structure.json",
+  "title": "Cart",
+  "description": "A shopping cart.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Cart identifier."
+    },
+    "items": {
+      "type": "array",
+      "description": "Items in the cart."
+    },
+    "subtotal": {
+      "type": "float",
+      "description": "Cart subtotal before tax."
+    }
+  }
+}

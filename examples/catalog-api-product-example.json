@@ -1,0 +1,10 @@
+{
+  "id": "SKU-123456",
+  "name": "Duralast Gold Brake Pad Set",
+  "partNumber": "MKD1083",
+  "brand": "Duralast Gold",
+  "description": "Semi-metallic brake pads for front axle",
+  "price": 54.99,
+  "available": true,
+  "categoryId": "brake-pads"
+}

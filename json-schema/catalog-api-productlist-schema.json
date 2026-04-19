@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProductList",
+  "description": "List of products matching search criteria.",
+  "type": "object",
+  "properties": {
+    "products": {
+      "type": "array",
+      "description": "Array of products.",
+      "items": {
+        "$ref": "#/$defs/Product"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of matching products.",
+      "example": 42
+    }
+  }
+}

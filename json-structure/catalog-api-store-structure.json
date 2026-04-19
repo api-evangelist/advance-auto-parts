@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "store-structure.json",
+  "title": "Store",
+  "description": "An Advance Auto Parts retail store.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Store identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Store name."
+    },
+    "address": {
+      "type": "string",
+      "description": "Street address."
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number."
+    },
+    "hours": {
+      "type": "string",
+      "description": "Business hours."
+    },
+    "distance": {
+      "type": "float",
+      "description": "Distance in miles."
+    }
+  }
+}

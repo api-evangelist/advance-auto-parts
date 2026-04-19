@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoreList",
+  "description": "List of nearby store locations.",
+  "type": "object",
+  "properties": {
+    "stores": {
+      "type": "array",
+      "description": "Array of store locations.",
+      "items": {
+        "$ref": "#/$defs/Store"
+      }
+    }
+  }
+}

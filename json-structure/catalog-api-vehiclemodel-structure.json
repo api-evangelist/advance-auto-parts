@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "vehiclemodel-structure.json",
+  "title": "VehicleModel",
+  "description": "A vehicle model.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Model identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Model display name."
+    }
+  }
+}

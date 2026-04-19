@@ -1,0 +1,16 @@
+{
+  "models": [
+    {
+      "id": "F150",
+      "name": "F-150"
+    },
+    {
+      "id": "MUST",
+      "name": "Mustang"
+    },
+    {
+      "id": "EXPL",
+      "name": "Explorer"
+    }
+  ]
+}

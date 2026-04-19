@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderList",
+  "description": "List of orders.",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "description": "Array of orders.",
+      "items": {
+        "$ref": "#/$defs/Order"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of orders.",
+      "example": 25
+    }
+  }
+}

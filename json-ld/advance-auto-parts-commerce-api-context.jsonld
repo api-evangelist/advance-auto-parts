@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aap": "https://api.advanceautoparts.com/commerce/v1/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CartItem": "schema:OrderItem",
+    "productId": "aap:productId",
+    "quantity": "schema:orderQuantity",
+    "unitPrice": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "CartItemInput": "aap:CartItemInput",
+    "Cart": "schema:Order",
+    "id": "@id",
+    "items": "schema:orderedItem",
+    "subtotal": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "OrderInput": "aap:OrderInput",
+    "cartId": "aap:cartId",
+    "storeId": "aap:storeId",
+    "fulfillmentType": "aap:fulfillmentType",
+    "paymentMethodId": "aap:paymentMethodId",
+    "Order": "schema:Order",
+    "status": "schema:orderStatus",
+    "total": {
+      "@id": "schema:totalPrice",
+      "@type": "xsd:decimal"
+    },
+    "createdAt": {
+      "@id": "schema:orderDate",
+      "@type": "xsd:dateTime"
+    },
+    "OrderList": "aap:OrderList",
+    "orders": "aap:orders",
+    "LoyaltyAccount": "schema:LoyaltyProgram",
+    "accountId": "aap:accountId",
+    "memberId": "aap:memberId",
+    "pointsBalance": "aap:pointsBalance",
+    "tier": "aap:tier",
+    "rewardValue": {
+      "@id": "aap:rewardValue",
+      "@type": "xsd:decimal"
+    },
+    "LoyaltyTransaction": "aap:LoyaltyTransaction",
+    "type": "@type",
+    "points": "aap:points",
+    "description": "schema:description",
+    "date": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "LoyaltyTransactionList": "aap:LoyaltyTransactionList",
+    "transactions": "aap:transactions",
+    "ErrorResponse": "aap:ErrorResponse",
+    "code": "aap:errorCode",
+    "message": "schema:description"
+  }
+}

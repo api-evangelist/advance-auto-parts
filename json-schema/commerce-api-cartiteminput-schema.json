@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CartItemInput",
+  "description": "Request to add an item to the cart.",
+  "type": "object",
+  "required": [
+    "productId",
+    "quantity"
+  ],
+  "properties": {
+    "productId": {
+      "type": "string",
+      "description": "Product SKU to add.",
+      "example": "SKU-123456"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "Quantity to add.",
+      "example": 2
+    }
+  }
+}

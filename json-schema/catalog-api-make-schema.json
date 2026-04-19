@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Make",
+  "description": "A vehicle manufacturer.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Make identifier.",
+      "example": "FORD"
+    },
+    "name": {
+      "type": "string",
+      "description": "Make display name.",
+      "example": "Ford"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderInput",
+  "description": "Request to create a new order.",
+  "type": "object",
+  "required": [
+    "cartId",
+    "fulfillmentType"
+  ],
+  "properties": {
+    "cartId": {
+      "type": "string",
+      "description": "Cart to convert to an order.",
+      "example": "cart-abc123"
+    },
+    "storeId": {
+      "type": "string",
+      "description": "Store for pickup."
+    },
+    "fulfillmentType": {
+      "type": "string",
+      "description": "Fulfillment type.",
+      "enum": [
+        "store-pickup",
+        "same-day-delivery",
+        "standard-shipping"
+      ]
+    },
+    "paymentMethodId": {
+      "type": "string",
+      "description": "Payment method identifier."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "order-001",
+  "status": "delivered",
+  "total": 109.98,
+  "createdAt": "2026-04-01T10:30:00Z",
+  "items": [
+    {
+      "productId": "SKU-123456",
+      "quantity": 2,
+      "unitPrice": 54.99
+    }
+  ]
+}

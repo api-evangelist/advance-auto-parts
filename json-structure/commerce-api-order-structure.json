@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "order-structure.json",
+  "title": "Order",
+  "description": "A placed order.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Order identifier."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current order status."
+    },
+    "total": {
+      "type": "float",
+      "description": "Order total."
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "Order creation timestamp."
+    },
+    "items": {
+      "type": "array",
+      "description": "Items in the order."
+    }
+  }
+}

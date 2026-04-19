@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "orderlist-structure.json",
+  "title": "OrderList",
+  "description": "List of orders.",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "description": "Array of orders."
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of orders."
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "orders": [
+    {
+      "id": "order-001",
+      "status": "delivered",
+      "total": 109.98,
+      "createdAt": "2026-04-01T10:30:00Z"
+    }
+  ],
+  "total": 25
+}

@@ -1,0 +1,13 @@
+{
+  "products": [
+    {
+      "id": "SKU-123456",
+      "name": "Duralast Gold Brake Pad Set",
+      "partNumber": "MKD1083",
+      "brand": "Duralast Gold",
+      "price": 54.99,
+      "available": true
+    }
+  ],
+  "total": 42
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "productlist-structure.json",
+  "title": "ProductList",
+  "description": "List of products matching search criteria.",
+  "type": "object",
+  "properties": {
+    "products": {
+      "type": "array",
+      "description": "Array of products."
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total number of matching products."
+    }
+  }
+}

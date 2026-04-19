@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "YearList",
+  "description": "List of available vehicle model years.",
+  "type": "object",
+  "properties": {
+    "years": {
+      "type": "array",
+      "description": "Array of model years.",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

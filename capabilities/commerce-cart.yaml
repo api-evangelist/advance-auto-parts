@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Advance Auto Parts Commerce API — Cart
+  description: 'Advance Auto Parts Commerce API — Cart. 2 operations. Lead operation: Advance Auto Parts Get Current Cart.
+    Self-contained Naftiko capability covering one Advance Auto Parts business surface.'
+  tags:
+  - Advance Auto Parts
+  - Cart
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADVANCE_AUTO_PARTS_API_KEY: ADVANCE_AUTO_PARTS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: commerce-cart
+    baseUri: https://api.advanceautoparts.com/commerce/v1
+    description: Advance Auto Parts Commerce API — Cart business capability. Self-contained, no shared references.
+    resources:
+    - name: cart
+      path: /cart
+      operations:
+      - name: getcart
+        method: GET
+        description: Advance Auto Parts Get Current Cart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: addtocart
+        method: POST
+        description: Advance Auto Parts Add Item to Cart
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADVANCE_AUTO_PARTS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: commerce-cart-rest
+    port: 8080
+    description: REST adapter for Advance Auto Parts Commerce API — Cart. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/cart
+      name: cart
+      description: REST surface for cart.
+      operations:
+      - method: GET
+        name: getcart
+        description: Advance Auto Parts Get Current Cart
+        call: commerce-cart.getcart
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addtocart
+        description: Advance Auto Parts Add Item to Cart
+        call: commerce-cart.addtocart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: commerce-cart-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Advance Auto Parts Commerce API — Cart. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: advance-auto-parts-get-current
+      description: Advance Auto Parts Get Current Cart
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: commerce-cart.getcart
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: advance-auto-parts-add-item
+      description: Advance Auto Parts Add Item to Cart
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: commerce-cart.addtocart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

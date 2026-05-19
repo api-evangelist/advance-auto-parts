@@ -1,0 +1,100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Advance Auto Parts Catalog API — Inventory
+  description: 'Advance Auto Parts Catalog API — Inventory. 1 operations. Lead operation: Advance Auto Parts Check Product
+    Inventory. Self-contained Naftiko capability covering one Advance Auto Parts business surface.'
+  tags:
+  - Advance Auto Parts
+  - Inventory
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADVANCE_AUTO_PARTS_API_KEY: ADVANCE_AUTO_PARTS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: catalog-inventory
+    baseUri: https://api.advanceautoparts.com/v1
+    description: Advance Auto Parts Catalog API — Inventory business capability. Self-contained, no shared references.
+    resources:
+    - name: inventory
+      path: /inventory
+      operations:
+      - name: checkinventory
+        method: GET
+        description: Advance Auto Parts Check Product Inventory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: productId
+          in: query
+          type: string
+          description: Product SKU or part number.
+          required: true
+        - name: storeId
+          in: query
+          type: string
+          description: Specific store ID to check.
+        - name: zip
+          in: query
+          type: string
+          description: ZIP code to find nearby stores.
+        - name: radius
+          in: query
+          type: integer
+          description: Search radius in miles.
+    authentication:
+      type: apikey
+      key: X-API-Key
+      value: '{{env.ADVANCE_AUTO_PARTS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: catalog-inventory-rest
+    port: 8080
+    description: REST adapter for Advance Auto Parts Catalog API — Inventory. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/inventory
+      name: inventory
+      description: REST surface for inventory.
+      operations:
+      - method: GET
+        name: checkinventory
+        description: Advance Auto Parts Check Product Inventory
+        call: catalog-inventory.checkinventory
+        with:
+          productId: rest.productId
+          storeId: rest.storeId
+          zip: rest.zip
+          radius: rest.radius
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: catalog-inventory-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Advance Auto Parts Catalog API — Inventory. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: advance-auto-parts-check-product
+      description: Advance Auto Parts Check Product Inventory
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: catalog-inventory.checkinventory
+      with:
+        productId: tools.productId
+        storeId: tools.storeId
+        zip: tools.zip
+        radius: tools.radius
+      outputParameters:
+      - type: object
+        mapping: $.

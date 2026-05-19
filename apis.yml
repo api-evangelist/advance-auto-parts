@@ -55,6 +55,8 @@ apis:
   - type: Vocabulary
     url: vocabulary/advance-auto-parts-vocabulary.yaml
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/advance-auto-parts
 - type: Website
   url: https://www.advanceautoparts.com
 - type: Portal

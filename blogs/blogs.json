@@ -2,13 +2,13 @@
   "repo": "advance-auto-parts",
   "feeds": [
     {
-      "source": "https://www.advanceautoparts.com/gearhead",
-      "feed_url": "",
+      "source": "https://www.advanceautoparts.com/i/help/customer-service",
+      "feed_url": "https://www.advanceautoparts.com/i/help/customer-service",
       "title": "",
       "saved": 0,
-      "error": "no_feed"
+      "method": "none"
     }
   ],
-  "fetched": "2026-05-17T20:48:52Z",
+  "fetched": "2026-06-01T23:35:02Z",
   "post_count": 0
 }

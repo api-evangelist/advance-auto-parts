@@ -1,0 +1,265 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Advance Auto Parts Catalog API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advance Auto Parts List Vehicle Years",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/vehicles/years"
+          },
+          "docs": "Retrieve all available vehicle model years for fitment lookup."
+        },
+        {
+          "info": {
+            "name": "Advance Auto Parts List Vehicle Makes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/vehicles/makes",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model year."
+              }
+            ]
+          },
+          "docs": "Retrieve all available vehicle makes for a given model year."
+        },
+        {
+          "info": {
+            "name": "Advance Auto Parts List Vehicle Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/vehicles/models",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model year."
+              },
+              {
+                "name": "makeId",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle make identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve all vehicle models for a given year and make."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advance Auto Parts Search Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/products",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Keyword search query."
+              },
+              {
+                "name": "partNumber",
+                "value": "",
+                "type": "query",
+                "description": "Specific part number to look up."
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model year for fitment filter."
+              },
+              {
+                "name": "makeId",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle make ID for fitment filter."
+              },
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model ID for fitment filter."
+              },
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "query",
+                "description": "Product category ID to filter results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of products to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              }
+            ]
+          },
+          "docs": "Search the parts catalog by keyword, part number, or vehicle fitment parameters."
+        },
+        {
+          "info": {
+            "name": "Advance Auto Parts Get Product Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/products/:productId",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product SKU or part number."
+              }
+            ]
+          },
+          "docs": "Retrieve full product details including specifications, images, and compatibility notes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advance Auto Parts Check Product Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/inventory",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Product SKU or part number."
+              },
+              {
+                "name": "storeId",
+                "value": "",
+                "type": "query",
+                "description": "Specific store ID to check."
+              },
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "ZIP code to find nearby stores."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles."
+              }
+            ]
+          },
+          "docs": "Check availability and quantity of a product at nearby stores or warehouses."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advance Auto Parts List Nearby Stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/stores",
+            "params": [
+              {
+                "name": "zip",
+                "value": "",
+                "type": "query",
+                "description": "ZIP code to search near."
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude coordinate."
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude coordinate."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in miles."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of stores to return."
+              }
+            ]
+          },
+          "docs": "Find Advance Auto Parts store locations near a ZIP code or geographic coordinates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

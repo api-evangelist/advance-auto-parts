@@ -1,0 +1,1260 @@
+{
+  "item": [
+    {
+      "id": "85be57c7-6b82-4a8f-885b-20e9e7682cdc",
+      "name": "Vehicles",
+      "description": {
+        "content": "Vehicle year/make/model lookup and fitment",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4200205d-14f4-48e1-9493-ac054aebfddf",
+          "name": "Advance Auto Parts List Vehicle Years",
+          "request": {
+            "name": "Advance Auto Parts List Vehicle Years",
+            "description": {
+              "content": "Retrieve all available vehicle model years for fitment lookup.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicles",
+                "years"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4e50dee-ff47-4a57-9489-b712adf391b1",
+              "name": "List of vehicle years.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    "years"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"years\": [\n    2024,\n    2023,\n    2022\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f66b385-8fa6-4b0e-bce0-31d16ba483c0",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    "years"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b073f0eb-b9b8-48a9-b072-43e04907d807",
+          "name": "Advance Auto Parts List Vehicle Makes",
+          "request": {
+            "name": "Advance Auto Parts List Vehicle Makes",
+            "description": {
+              "content": "Retrieve all available vehicle makes for a given model year.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicles",
+                "makes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "(Required) Vehicle model year."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a018f01-6d83-4d2e-9598-f2a9bcb02481",
+              "name": "List of vehicle makes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    "makes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2022"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"makes\": [\n    {\n      \"id\": \"FORD\",\n      \"name\": \"Ford\"\n    },\n    {\n      \"id\": \"CHEV\",\n      \"name\": \"Chevrolet\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e6c341b-c368-4f12-babc-4dedca696bf8",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    "makes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "2022"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a30415b1-d88c-428d-9846-f139c3d6533e",
+          "name": "Advance Auto Parts List Vehicle Models",
+          "request": {
+            "name": "Advance Auto Parts List Vehicle Models",
+            "description": {
+              "content": "Retrieve all vehicle models for a given year and make.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vehicles",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "(Required) Vehicle model year."
+                },
+                {
+                  "disabled": false,
+                  "key": "makeId",
+                  "value": "<string>",
+                  "description": "(Required) Vehicle make identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7ed5e13-dbae-4150-a294-6e2598174e54",
+              "name": "List of vehicle models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "makeId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"id\": \"F150\",\n      \"name\": \"F-150\"\n    },\n    {\n      \"id\": \"MUST\",\n      \"name\": \"Mustang\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77190906-67ca-4750-9cfa-b2e6bfcd55ec",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vehicles",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "makeId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9e9fd4fe-839e-4fc7-97c3-f1c0386d9409",
+      "name": "Products",
+      "description": {
+        "content": "Parts and product catalog",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56014598-a391-4e4a-96bc-1242b9e17464",
+          "name": "Advance Auto Parts Search Products",
+          "request": {
+            "name": "Advance Auto Parts Search Products",
+            "description": {
+              "content": "Search the parts catalog by keyword, part number, or vehicle fitment parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Keyword search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "partNumber",
+                  "value": "<string>",
+                  "description": "Specific part number to look up."
+                },
+                {
+                  "disabled": false,
+                  "key": "year",
+                  "value": "<integer>",
+                  "description": "Vehicle model year for fitment filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "makeId",
+                  "value": "<string>",
+                  "description": "Vehicle make ID for fitment filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "modelId",
+                  "value": "<string>",
+                  "description": "Vehicle model ID for fitment filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "description": "Product category ID to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of products to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4e19314-15f6-4636-8cec-5d82fb287ea4",
+              "name": "Matching products.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "makeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modelId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"id\": \"SKU-123456\",\n      \"name\": \"Duralast Gold Brake Pad Set\",\n      \"partNumber\": \"MKD1083\",\n      \"brand\": \"Duralast Gold\",\n      \"price\": 54.99,\n      \"available\": true\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2968b57c-8060-4f69-891d-5271752c5a30",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "year",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "makeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modelId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99ae30bc-aa40-425f-9c5b-3d8b16cc95a9",
+          "name": "Advance Auto Parts Get Product Details",
+          "request": {
+            "name": "Advance Auto Parts Get Product Details",
+            "description": {
+              "content": "Retrieve full product details including specifications, images, and compatibility notes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":productId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) Product SKU or part number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25153872-ec3b-40bb-b7cc-20b3e275b73d",
+              "name": "Product details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) Product SKU or part number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"SKU-123456\",\n  \"name\": \"Duralast Gold Brake Pad Set\",\n  \"partNumber\": \"MKD1083\",\n  \"brand\": \"Duralast Gold\",\n  \"description\": \"Semi-metallic brake pads for front axle\",\n  \"price\": 54.99,\n  \"available\": true,\n  \"categoryId\": \"brake-pads\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b56e6405-679a-41b1-8cf7-7c13113173ab",
+              "name": "Product not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) Product SKU or part number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"NOT_FOUND\",\n  \"message\": \"Product not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "08122b62-0cc2-41dc-ad7a-80ac28babbfe",
+      "name": "Inventory",
+      "description": {
+        "content": "Store and warehouse inventory",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8536df59-9f10-416e-9f02-ee0e2f5b6bf4",
+          "name": "Advance Auto Parts Check Product Inventory",
+          "request": {
+            "name": "Advance Auto Parts Check Product Inventory",
+            "description": {
+              "content": "Check availability and quantity of a product at nearby stores or warehouses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inventory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "(Required) Product SKU or part number."
+                },
+                {
+                  "disabled": false,
+                  "key": "storeId",
+                  "value": "<string>",
+                  "description": "Specific store ID to check."
+                },
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "ZIP code to find nearby stores."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "25",
+                  "description": "Search radius in miles."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63e1559c-5223-4ca9-8d43-49e68261a163",
+              "name": "Inventory availability.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"productId\": \"SKU-123456\",\n  \"stores\": [\n    {\n      \"storeId\": \"store-001\",\n      \"storeName\": \"Advance Auto Parts - Main St\",\n      \"quantity\": 4,\n      \"available\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "918c5faf-f23d-495a-80ce-390b4319d462",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inventory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "storeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0dd19571-d31e-4e3d-b8cb-8b0bd90fa851",
+      "name": "Stores",
+      "description": {
+        "content": "Store locations and availability",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "910f5e81-fbe7-4e32-a024-b5364e71f2fd",
+          "name": "Advance Auto Parts List Nearby Stores",
+          "request": {
+            "name": "Advance Auto Parts List Nearby Stores",
+            "description": {
+              "content": "Find Advance Auto Parts store locations near a ZIP code or geographic coordinates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "zip",
+                  "value": "<string>",
+                  "description": "ZIP code to search near."
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<float>",
+                  "description": "Latitude coordinate."
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<float>",
+                  "description": "Longitude coordinate."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "25",
+                  "description": "Search radius in miles."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of stores to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b457dba-c7ae-4281-8757-5a2c5f39801e",
+              "name": "List of nearby stores.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "25"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stores\": [\n    {\n      \"id\": \"store-001\",\n      \"name\": \"Advance Auto Parts - Main St\",\n      \"address\": \"123 Main St, Springfield, IL 62701\",\n      \"phone\": \"217-555-0100\",\n      \"hours\": \"Mon-Sat 7:30AM-9PM, Sun 9AM-8PM\",\n      \"distance\": 1.2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f87f20d1-8eb2-4a00-8985-87b8a83d49bc",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zip",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "25"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.advanceautoparts.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c9a86386-bdb3-4dc2-99ed-172fb8fbad2a",
+    "name": "Advance Auto Parts Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.\n\nContact Support:\n Name: Advance Auto Parts Support",
+      "type": "text/plain"
+    }
+  }
+}

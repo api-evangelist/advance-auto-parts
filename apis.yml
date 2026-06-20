@@ -130,7 +130,7 @@ description: >-
   parts, accessories, batteries, and maintenance items. The company serves both professional automotive technicians and
   do-it-yourself customers across North America through retail stores, online, and commercial delivery programs.
 name: Advance Auto Parts
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 type: Index
 created: '2024-01-01'
 specificationVersion: '0.19'

@@ -6,7 +6,8 @@
       "feed_url": "https://www.advanceautoparts.com/gearhead",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "note": "No RSS/Atom feed resolves (feed/, rss/, feed.xml, index.xml, rss.xml all empty); gearhead HTML page returns empty/JS-rendered content with no scrapable post links."
     },
     {
       "source": "https://www.advanceautoparts.com/i/help/customer-service",
@@ -17,5 +18,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-21T17:00:00Z"
 }

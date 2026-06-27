@@ -3,20 +3,11 @@
   "feeds": [
     {
       "source": "https://www.advanceautoparts.com/gearhead",
-      "feed_url": "https://www.advanceautoparts.com/gearhead",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none",
-      "note": "No RSS/Atom feed resolves (feed/, rss/, feed.xml, index.xml, rss.xml all empty); gearhead HTML page returns empty/JS-rendered content with no scrapable post links."
-    },
-    {
-      "source": "https://www.advanceautoparts.com/i/help/customer-service",
-      "feed_url": "https://www.advanceautoparts.com/i/help/customer-service",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "error": "timeout/empty content; could not extract posts"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-21T17:00:00Z"
+  "fetched": "2026-06-27T12:20:57Z"
 }

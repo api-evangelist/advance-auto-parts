@@ -75,7 +75,7 @@ common:
     url: https://www.advanceautoparts.com/i/policies/privacy
   - type: Login
     url: https://www.advanceautoparts.com/myaccount/login
-  - type: SignUp
+  - type: Signup
     url: https://www.advanceautoparts.com/myaccount/register
   - type: Features
     data:

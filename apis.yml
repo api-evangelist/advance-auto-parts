@@ -57,6 +57,10 @@ apis:
       - type: Vocabulary
         url: vocabulary/advance-auto-parts-vocabulary.yaml
 common:
+  - type: DomainSecurity
+    url: security/advance-auto-parts-domain-security.yml
+  - type: Authentication
+    url: authentication/advance-auto-parts-authentication.yml
   - type: OAuthScopes
     url: scopes/advance-auto-parts-scopes.yml
   - type: GitHubOrganization

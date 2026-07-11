@@ -57,6 +57,8 @@ apis:
       - type: Vocabulary
         url: vocabulary/advance-auto-parts-vocabulary.yaml
 common:
+  - type: OAuthScopes
+    url: scopes/advance-auto-parts-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/AdvanceAutoParts
   - type: LinkedIn

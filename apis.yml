@@ -57,6 +57,8 @@ apis:
       - type: Vocabulary
         url: vocabulary/advance-auto-parts-vocabulary.yaml
 common:
+  - type: AgenticAccess
+    url: agentic-access/advance-auto-parts-agentic-access.yml
   - type: DomainSecurity
     url: security/advance-auto-parts-domain-security.yml
   - type: Authentication

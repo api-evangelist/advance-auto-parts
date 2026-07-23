@@ -1,0 +1,205 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Catalog Cart Loyalty API
+  description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+  version: '1'
+  contact:
+    name: Advance Auto Parts Support
+    url: https://www.advanceautoparts.com/i/help/customer-service
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+- url: https://api.advanceautoparts.com/v1
+  description: Advance Auto Parts Catalog API Production
+security:
+- apiKey: []
+tags:
+- name: Loyalty
+  description: Speed Perks loyalty program
+paths:
+  /loyalty/account:
+    get:
+      operationId: getLoyaltyAccount
+      summary: Advance Auto Parts Get Loyalty Account
+      description: Retrieve Speed Perks loyalty account details including points balance and reward status.
+      tags:
+      - Loyalty
+      responses:
+        '200':
+          description: Loyalty account details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoyaltyAccount'
+              examples:
+                getLoyaltyAccount200Example:
+                  summary: Default getLoyaltyAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    accountId: sp-001
+                    memberId: '123456789'
+                    pointsBalance: 2500
+                    tier: Gold
+                    rewardValue: 5.0
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getLoyaltyAccount401Example:
+                  summary: Default getLoyaltyAccount 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Authentication required
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /loyalty/transactions:
+    get:
+      operationId: getLoyaltyTransactions
+      summary: Advance Auto Parts Get Loyalty Transactions
+      description: Retrieve Speed Perks points transaction history for the loyalty account.
+      tags:
+      - Loyalty
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of transactions to return.
+        schema:
+          type: integer
+          default: 20
+      - name: offset
+        in: query
+        required: false
+        description: Pagination offset.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Points transaction history.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoyaltyTransactionList'
+              examples:
+                getLoyaltyTransactions200Example:
+                  summary: Default getLoyaltyTransactions 200 response
+                  x-microcks-default: true
+                  value:
+                    transactions:
+                    - id: txn-001
+                      type: earn
+                      points: 100
+                      description: 'Purchase #order-001'
+                      date: '2026-04-01T10:30:00Z'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getLoyaltyTransactions401Example:
+                  summary: Default getLoyaltyTransactions 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Authentication required
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LoyaltyTransactionList:
+      type: object
+      description: List of loyalty transactions.
+      properties:
+        transactions:
+          type: array
+          description: Array of transactions.
+          items:
+            $ref: '#/components/schemas/LoyaltyTransaction'
+    LoyaltyTransaction:
+      type: object
+      description: A Speed Perks points transaction.
+      properties:
+        id:
+          type: string
+          description: Transaction ID.
+          example: txn-001
+        type:
+          type: string
+          description: Transaction type.
+          enum:
+          - earn
+          - redeem
+          - expire
+          - adjust
+          example: earn
+        points:
+          type: integer
+          description: Points earned or redeemed.
+          example: 100
+        description:
+          type: string
+          description: Transaction description.
+          example: 'Purchase #order-001'
+        date:
+          type: string
+          format: date-time
+          description: Transaction date.
+          example: '2026-04-01T10:30:00Z'
+    LoyaltyAccount:
+      type: object
+      description: A Speed Perks loyalty account.
+      properties:
+        accountId:
+          type: string
+          description: Loyalty account ID.
+          example: sp-001
+        memberId:
+          type: string
+          description: Member ID number.
+          example: '123456789'
+        pointsBalance:
+          type: integer
+          description: Current points balance.
+          example: 2500
+        tier:
+          type: string
+          description: Loyalty tier.
+          enum:
+          - Bronze
+          - Silver
+          - Gold
+          - Platinum
+          example: Gold
+        rewardValue:
+          type: number
+          format: float
+          description: Dollar value of available rewards.
+          example: 5.0
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

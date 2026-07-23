@@ -1,0 +1,185 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Catalog Cart API
+  description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+  version: '1'
+  contact:
+    name: Advance Auto Parts Support
+    url: https://www.advanceautoparts.com/i/help/customer-service
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+- url: https://api.advanceautoparts.com/v1
+  description: Advance Auto Parts Catalog API Production
+security:
+- apiKey: []
+tags:
+- name: Cart
+  description: Shopping cart management
+paths:
+  /cart:
+    get:
+      operationId: getCart
+      summary: Advance Auto Parts Get Current Cart
+      description: Retrieve the current shopping cart contents for the authenticated session.
+      tags:
+      - Cart
+      responses:
+        '200':
+          description: Current cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                getCart200Example:
+                  summary: Default getCart 200 response
+                  x-microcks-default: true
+                  value:
+                    id: cart-abc123
+                    items:
+                    - productId: SKU-123456
+                      quantity: 2
+                      unitPrice: 54.99
+                    subtotal: 109.98
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getCart401Example:
+                  summary: Default getCart 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Authentication required
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: addToCart
+      summary: Advance Auto Parts Add Item to Cart
+      description: Add a product to the shopping cart.
+      tags:
+      - Cart
+      requestBody:
+        required: true
+        description: Item to add to cart.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemInput'
+            examples:
+              addToCartRequestExample:
+                summary: Default addToCart request
+                x-microcks-default: true
+                value:
+                  productId: SKU-123456
+                  quantity: 2
+      responses:
+        '200':
+          description: Updated cart.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+              examples:
+                addToCart200Example:
+                  summary: Default addToCart 200 response
+                  x-microcks-default: true
+                  value:
+                    id: cart-abc123
+                    items:
+                    - productId: SKU-123456
+                      quantity: 2
+                      unitPrice: 54.99
+                    subtotal: 109.98
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                addToCart401Example:
+                  summary: Default addToCart 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Authentication required
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CartItem:
+      type: object
+      description: An item in the shopping cart.
+      properties:
+        productId:
+          type: string
+          description: Product SKU.
+          example: SKU-123456
+        quantity:
+          type: integer
+          description: Quantity of the item.
+          example: 2
+        unitPrice:
+          type: number
+          format: float
+          description: Price per unit.
+          example: 54.99
+    CartItemInput:
+      type: object
+      description: Request to add an item to the cart.
+      required:
+      - productId
+      - quantity
+      properties:
+        productId:
+          type: string
+          description: Product SKU to add.
+          example: SKU-123456
+        quantity:
+          type: integer
+          description: Quantity to add.
+          example: 2
+    Cart:
+      type: object
+      description: A shopping cart.
+      properties:
+        id:
+          type: string
+          description: Cart identifier.
+          example: cart-abc123
+        items:
+          type: array
+          description: Items in the cart.
+          items:
+            $ref: '#/components/schemas/CartItem'
+        subtotal:
+          type: number
+          format: float
+          description: Cart subtotal before tax.
+          example: 109.98
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

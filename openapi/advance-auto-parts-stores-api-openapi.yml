@@ -1,0 +1,155 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Catalog Cart Stores API
+  description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+  version: '1'
+  contact:
+    name: Advance Auto Parts Support
+    url: https://www.advanceautoparts.com/i/help/customer-service
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+- url: https://api.advanceautoparts.com/v1
+  description: Advance Auto Parts Catalog API Production
+security:
+- apiKey: []
+tags:
+- name: Stores
+  description: Store locations and availability
+paths:
+  /stores:
+    get:
+      operationId: getStores
+      summary: Advance Auto Parts List Nearby Stores
+      description: Find Advance Auto Parts store locations near a ZIP code or geographic coordinates.
+      tags:
+      - Stores
+      parameters:
+      - name: zip
+        in: query
+        required: false
+        description: ZIP code to search near.
+        schema:
+          type: string
+      - name: lat
+        in: query
+        required: false
+        description: Latitude coordinate.
+        schema:
+          type: number
+          format: float
+      - name: lon
+        in: query
+        required: false
+        description: Longitude coordinate.
+        schema:
+          type: number
+          format: float
+      - name: radius
+        in: query
+        required: false
+        description: Search radius in miles.
+        schema:
+          type: integer
+          default: 25
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of stores to return.
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: List of nearby stores.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreList'
+              examples:
+                getStores200Example:
+                  summary: Default getStores 200 response
+                  x-microcks-default: true
+                  value:
+                    stores:
+                    - id: store-001
+                      name: Advance Auto Parts - Main St
+                      address: 123 Main St, Springfield, IL 62701
+                      phone: 217-555-0100
+                      hours: Mon-Sat 7:30AM-9PM, Sun 9AM-8PM
+                      distance: 1.2
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getStores401Example:
+                  summary: Default getStores 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Store:
+      type: object
+      description: An Advance Auto Parts retail store.
+      properties:
+        id:
+          type: string
+          description: Store identifier.
+          example: store-001
+        name:
+          type: string
+          description: Store name.
+          example: Advance Auto Parts - Main St
+        address:
+          type: string
+          description: Street address.
+          example: 123 Main St, Springfield, IL 62701
+        phone:
+          type: string
+          description: Phone number.
+          example: 217-555-0100
+        hours:
+          type: string
+          description: Business hours.
+          example: Mon-Sat 7:30AM-9PM, Sun 9AM-8PM
+        distance:
+          type: number
+          format: float
+          description: Distance from search location in miles.
+          example: 1.2
+    StoreList:
+      type: object
+      description: List of nearby store locations.
+      properties:
+        stores:
+          type: array
+          description: Array of store locations.
+          items:
+            $ref: '#/components/schemas/Store'
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

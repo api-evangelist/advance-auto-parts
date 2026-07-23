@@ -1,0 +1,234 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Catalog Cart Products API
+  description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+  version: '1'
+  contact:
+    name: Advance Auto Parts Support
+    url: https://www.advanceautoparts.com/i/help/customer-service
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+- url: https://api.advanceautoparts.com/v1
+  description: Advance Auto Parts Catalog API Production
+security:
+- apiKey: []
+tags:
+- name: Products
+  description: Parts and product catalog
+paths:
+  /products:
+    get:
+      operationId: searchProducts
+      summary: Advance Auto Parts Search Products
+      description: Search the parts catalog by keyword, part number, or vehicle fitment parameters.
+      tags:
+      - Products
+      parameters:
+      - name: q
+        in: query
+        required: false
+        description: Keyword search query.
+        schema:
+          type: string
+      - name: partNumber
+        in: query
+        required: false
+        description: Specific part number to look up.
+        schema:
+          type: string
+      - name: year
+        in: query
+        required: false
+        description: Vehicle model year for fitment filter.
+        schema:
+          type: integer
+      - name: makeId
+        in: query
+        required: false
+        description: Vehicle make ID for fitment filter.
+        schema:
+          type: string
+      - name: modelId
+        in: query
+        required: false
+        description: Vehicle model ID for fitment filter.
+        schema:
+          type: string
+      - name: categoryId
+        in: query
+        required: false
+        description: Product category ID to filter results.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of products to return.
+        schema:
+          type: integer
+          default: 20
+      - name: offset
+        in: query
+        required: false
+        description: Pagination offset.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Matching products.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+              examples:
+                searchProducts200Example:
+                  summary: Default searchProducts 200 response
+                  x-microcks-default: true
+                  value:
+                    products:
+                    - id: SKU-123456
+                      name: Duralast Gold Brake Pad Set
+                      partNumber: MKD1083
+                      brand: Duralast Gold
+                      price: 54.99
+                      available: true
+                    total: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                searchProducts401Example:
+                  summary: Default searchProducts 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /products/{productId}:
+    get:
+      operationId: getProduct
+      summary: Advance Auto Parts Get Product Details
+      description: Retrieve full product details including specifications, images, and compatibility notes.
+      tags:
+      - Products
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        description: Product SKU or part number.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Product details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples:
+                getProduct200Example:
+                  summary: Default getProduct 200 response
+                  x-microcks-default: true
+                  value:
+                    id: SKU-123456
+                    name: Duralast Gold Brake Pad Set
+                    partNumber: MKD1083
+                    brand: Duralast Gold
+                    description: Semi-metallic brake pads for front axle
+                    price: 54.99
+                    available: true
+                    categoryId: brake-pads
+        '404':
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getProduct404Example:
+                  summary: Default getProduct 404 response
+                  x-microcks-default: true
+                  value:
+                    code: NOT_FOUND
+                    message: Product not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Product:
+      type: object
+      description: An automotive part or product.
+      properties:
+        id:
+          type: string
+          description: Product SKU.
+          example: SKU-123456
+        name:
+          type: string
+          description: Product name.
+          example: Duralast Gold Brake Pad Set
+        partNumber:
+          type: string
+          description: Manufacturer part number.
+          example: MKD1083
+        brand:
+          type: string
+          description: Brand name.
+          example: Duralast Gold
+        description:
+          type: string
+          description: Product description.
+          example: Semi-metallic brake pads for front axle.
+        price:
+          type: number
+          format: float
+          description: Current retail price.
+          example: 54.99
+        available:
+          type: boolean
+          description: Whether the product is available.
+          example: true
+        categoryId:
+          type: string
+          description: Product category identifier.
+          example: brake-pads
+    ProductList:
+      type: object
+      description: List of products matching search criteria.
+      properties:
+        products:
+          type: array
+          description: Array of products.
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: Total number of matching products.
+          example: 42
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

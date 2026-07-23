@@ -1,0 +1,316 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Catalog Cart Orders API
+  description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+  version: '1'
+  contact:
+    name: Advance Auto Parts Support
+    url: https://www.advanceautoparts.com/i/help/customer-service
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+- url: https://api.advanceautoparts.com/v1
+  description: Advance Auto Parts Catalog API Production
+security:
+- apiKey: []
+tags:
+- name: Orders
+  description: Order placement and management
+paths:
+  /orders:
+    get:
+      operationId: getOrders
+      summary: Advance Auto Parts List Orders
+      description: Retrieve order history for the authenticated commercial account.
+      tags:
+      - Orders
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        description: Filter orders placed on or after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        required: false
+        description: Filter orders placed on or before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: status
+        in: query
+        required: false
+        description: Filter by order status.
+        schema:
+          type: string
+          enum:
+          - pending
+          - processing
+          - shipped
+          - delivered
+          - cancelled
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of orders to return.
+        schema:
+          type: integer
+          default: 20
+      - name: offset
+        in: query
+        required: false
+        description: Pagination offset.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Order history.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+              examples:
+                getOrders200Example:
+                  summary: Default getOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    orders:
+                    - id: order-001
+                      status: delivered
+                      total: 109.98
+                      createdAt: '2026-04-01T10:30:00Z'
+                    total: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getOrders401Example:
+                  summary: Default getOrders 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Authentication required
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOrder
+      summary: Advance Auto Parts Create Order
+      description: Place a new order from the current cart contents.
+      tags:
+      - Orders
+      requestBody:
+        required: true
+        description: Order creation request.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderInput'
+            examples:
+              createOrderRequestExample:
+                summary: Default createOrder request
+                x-microcks-default: true
+                value:
+                  cartId: cart-abc123
+                  storeId: store-001
+                  fulfillmentType: store-pickup
+                  paymentMethodId: pm-001
+      responses:
+        '201':
+          description: Order created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                createOrder201Example:
+                  summary: Default createOrder 201 response
+                  x-microcks-default: true
+                  value:
+                    id: order-002
+                    status: pending
+                    total: 109.98
+                    createdAt: '2026-04-19T10:00:00Z'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                createOrder401Example:
+                  summary: Default createOrder 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Authentication required
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Advance Auto Parts Get Order Details
+      description: Retrieve details of a specific order including line items, tracking, and status.
+      tags:
+      - Orders
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        description: Order identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Order details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                getOrder200Example:
+                  summary: Default getOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    id: order-001
+                    status: delivered
+                    total: 109.98
+                    createdAt: '2026-04-01T10:30:00Z'
+                    items:
+                    - productId: SKU-123456
+                      quantity: 2
+                      unitPrice: 54.99
+        '404':
+          description: Order not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getOrder404Example:
+                  summary: Default getOrder 404 response
+                  x-microcks-default: true
+                  value:
+                    code: NOT_FOUND
+                    message: Order not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Order:
+      type: object
+      description: A placed order.
+      properties:
+        id:
+          type: string
+          description: Order identifier.
+          example: order-001
+        status:
+          type: string
+          description: Current order status.
+          enum:
+          - pending
+          - processing
+          - shipped
+          - delivered
+          - cancelled
+          example: delivered
+        total:
+          type: number
+          format: float
+          description: Order total.
+          example: 109.98
+        createdAt:
+          type: string
+          format: date-time
+          description: Order creation timestamp.
+          example: '2026-04-01T10:30:00Z'
+        items:
+          type: array
+          description: Items in the order.
+          items:
+            $ref: '#/components/schemas/CartItem'
+    OrderList:
+      type: object
+      description: List of orders.
+      properties:
+        orders:
+          type: array
+          description: Array of orders.
+          items:
+            $ref: '#/components/schemas/Order'
+        total:
+          type: integer
+          description: Total number of orders.
+          example: 25
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    CartItem:
+      type: object
+      description: An item in the shopping cart.
+      properties:
+        productId:
+          type: string
+          description: Product SKU.
+          example: SKU-123456
+        quantity:
+          type: integer
+          description: Quantity of the item.
+          example: 2
+        unitPrice:
+          type: number
+          format: float
+          description: Price per unit.
+          example: 54.99
+    OrderInput:
+      type: object
+      description: Request to create a new order.
+      required:
+      - cartId
+      - fulfillmentType
+      properties:
+        cartId:
+          type: string
+          description: Cart to convert to an order.
+          example: cart-abc123
+        storeId:
+          type: string
+          description: Store for pickup (required for store-pickup fulfillment).
+          example: store-001
+        fulfillmentType:
+          type: string
+          description: How to fulfill the order.
+          enum:
+          - store-pickup
+          - same-day-delivery
+          - standard-shipping
+          example: store-pickup
+        paymentMethodId:
+          type: string
+          description: Payment method identifier.
+          example: pm-001
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

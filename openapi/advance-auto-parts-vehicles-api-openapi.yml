@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Catalog Cart Vehicles API
+  description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+  version: '1'
+  contact:
+    name: Advance Auto Parts Support
+    url: https://www.advanceautoparts.com/i/help/customer-service
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+- url: https://api.advanceautoparts.com/v1
+  description: Advance Auto Parts Catalog API Production
+security:
+- apiKey: []
+tags:
+- name: Vehicles
+  description: Vehicle year/make/model lookup and fitment
+paths:
+  /vehicles/years:
+    get:
+      operationId: getVehicleYears
+      summary: Advance Auto Parts List Vehicle Years
+      description: Retrieve all available vehicle model years for fitment lookup.
+      tags:
+      - Vehicles
+      responses:
+        '200':
+          description: List of vehicle years.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearList'
+              examples:
+                getVehicleYears200Example:
+                  summary: Default getVehicleYears 200 response
+                  x-microcks-default: true
+                  value:
+                    years:
+                    - 2024
+                    - 2023
+                    - 2022
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getVehicleYears401Example:
+                  summary: Default getVehicleYears 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vehicles/makes:
+    get:
+      operationId: getVehicleMakes
+      summary: Advance Auto Parts List Vehicle Makes
+      description: Retrieve all available vehicle makes for a given model year.
+      tags:
+      - Vehicles
+      parameters:
+      - name: year
+        in: query
+        required: true
+        description: Vehicle model year.
+        schema:
+          type: integer
+          example: 2022
+      responses:
+        '200':
+          description: List of vehicle makes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeList'
+              examples:
+                getVehicleMakes200Example:
+                  summary: Default getVehicleMakes 200 response
+                  x-microcks-default: true
+                  value:
+                    makes:
+                    - id: FORD
+                      name: Ford
+                    - id: CHEV
+                      name: Chevrolet
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getVehicleMakes401Example:
+                  summary: Default getVehicleMakes 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vehicles/models:
+    get:
+      operationId: getVehicleModels
+      summary: Advance Auto Parts List Vehicle Models
+      description: Retrieve all vehicle models for a given year and make.
+      tags:
+      - Vehicles
+      parameters:
+      - name: year
+        in: query
+        required: true
+        description: Vehicle model year.
+        schema:
+          type: integer
+      - name: makeId
+        in: query
+        required: true
+        description: Vehicle make identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of vehicle models.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+              examples:
+                getVehicleModels200Example:
+                  summary: Default getVehicleModels 200 response
+                  x-microcks-default: true
+                  value:
+                    models:
+                    - id: F150
+                      name: F-150
+                    - id: MUST
+                      name: Mustang
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getVehicleModels401Example:
+                  summary: Default getVehicleModels 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ModelList:
+      type: object
+      description: List of vehicle models.
+      properties:
+        models:
+          type: array
+          description: Array of vehicle models.
+          items:
+            $ref: '#/components/schemas/VehicleModel'
+    MakeList:
+      type: object
+      description: List of vehicle makes.
+      properties:
+        makes:
+          type: array
+          description: Array of vehicle makes.
+          items:
+            $ref: '#/components/schemas/Make'
+    YearList:
+      type: object
+      description: List of available vehicle model years.
+      properties:
+        years:
+          type: array
+          description: Array of model years.
+          items:
+            type: integer
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    VehicleModel:
+      type: object
+      description: A vehicle model.
+      properties:
+        id:
+          type: string
+          description: Model identifier.
+          example: F150
+        name:
+          type: string
+          description: Model display name.
+          example: F-150
+    Make:
+      type: object
+      description: A vehicle manufacturer.
+      properties:
+        id:
+          type: string
+          description: Make identifier.
+          example: FORD
+        name:
+          type: string
+          description: Make display name.
+          example: Ford
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

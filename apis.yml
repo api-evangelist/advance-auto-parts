@@ -1,61 +1,202 @@
 aid: advance-auto-parts
 url: https://raw.githubusercontent.com/api-evangelist/advance-auto-parts/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 modified: '2026-04-19'
 apis:
-  - name: Advance Auto Parts Catalog API
-    description: >-
-      The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts,
-      accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number
-      searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
-    humanURL: https://www.advanceautoparts.com
-    baseURL: https://api.advanceautoparts.com/v1
-    tags:
-      - Automotive
-      - Parts Catalog
-      - Inventory
-      - Vehicle Fitment
-    properties:
-      - type: Documentation
-        url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
-      - type: OpenAPI
-        url: openapi/advance-auto-parts-catalog-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/
-      - type: JSONStructure
-        url: json-structure/
-      - type: JSONLD
-        url: json-ld/advance-auto-parts-catalog-api-context.jsonld
-      - type: SpectralRules
-        url: rules/advance-auto-parts-spectral-rules.yml
-      - type: Vocabulary
-        url: vocabulary/advance-auto-parts-vocabulary.yaml
-  - name: Advance Auto Parts Commerce API
-    description: >-
-      The Advance Auto Parts Commerce API enables ordering, cart management, loyalty program integration, and order
-      fulfillment for commercial accounts. Supports creating orders, managing Speed Perks loyalty points, tracking
-      shipments, and accessing purchase history for fleet and professional installer accounts.
-    humanURL: https://www.advanceautoparts.com/i/help/commercial-accounts
-    baseURL: https://api.advanceautoparts.com/commerce/v1
-    tags:
-      - Automotive
-      - E-Commerce
-      - Loyalty
-      - Order Management
-    properties:
-      - type: Documentation
-        url: https://www.advanceautoparts.com/i/help/commercial-accounts
-      - type: OpenAPI
-        url: openapi/advance-auto-parts-commerce-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/
-      - type: JSONStructure
-        url: json-structure/
-      - type: JSONLD
-        url: json-ld/advance-auto-parts-commerce-api-context.jsonld
-      - type: SpectralRules
-        url: rules/advance-auto-parts-spectral-rules.yml
-      - type: Vocabulary
-        url: vocabulary/advance-auto-parts-vocabulary.yaml
+- aid: advance-auto-parts:advance-auto-parts-cart-api
+  name: Advance Auto Parts Cart API
+  description: Shopping cart management
+  humanURL: https://www.advanceautoparts.com
+  baseURL: https://api.advanceautoparts.com/v1
+  tags:
+  - Cart
+  properties:
+  - type: OpenAPI
+    url: openapi/advance-auto-parts-cart-api-openapi.yml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-catalog-api-context.jsonld
+  - type: SpectralRules
+    url: rules/advance-auto-parts-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advance-auto-parts-vocabulary.yaml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-commerce-api-context.jsonld
+- aid: advance-auto-parts:advance-auto-parts-inventory-api
+  name: Advance Auto Parts Inventory API
+  description: Store and warehouse inventory
+  humanURL: https://www.advanceautoparts.com
+  baseURL: https://api.advanceautoparts.com/v1
+  tags:
+  - Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/advance-auto-parts-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-catalog-api-context.jsonld
+  - type: SpectralRules
+    url: rules/advance-auto-parts-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advance-auto-parts-vocabulary.yaml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-commerce-api-context.jsonld
+- aid: advance-auto-parts:advance-auto-parts-loyalty-api
+  name: Advance Auto Parts Loyalty API
+  description: Speed Perks loyalty program
+  humanURL: https://www.advanceautoparts.com
+  baseURL: https://api.advanceautoparts.com/v1
+  tags:
+  - Loyalty
+  properties:
+  - type: OpenAPI
+    url: openapi/advance-auto-parts-loyalty-api-openapi.yml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-catalog-api-context.jsonld
+  - type: SpectralRules
+    url: rules/advance-auto-parts-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advance-auto-parts-vocabulary.yaml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-commerce-api-context.jsonld
+- aid: advance-auto-parts:advance-auto-parts-orders-api
+  name: Advance Auto Parts Orders API
+  description: Order placement and management
+  humanURL: https://www.advanceautoparts.com
+  baseURL: https://api.advanceautoparts.com/v1
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/advance-auto-parts-orders-api-openapi.yml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-catalog-api-context.jsonld
+  - type: SpectralRules
+    url: rules/advance-auto-parts-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advance-auto-parts-vocabulary.yaml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-commerce-api-context.jsonld
+- aid: advance-auto-parts:advance-auto-parts-products-api
+  name: Advance Auto Parts Products API
+  description: Parts and product catalog
+  humanURL: https://www.advanceautoparts.com
+  baseURL: https://api.advanceautoparts.com/v1
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/advance-auto-parts-products-api-openapi.yml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-catalog-api-context.jsonld
+  - type: SpectralRules
+    url: rules/advance-auto-parts-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advance-auto-parts-vocabulary.yaml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-commerce-api-context.jsonld
+- aid: advance-auto-parts:advance-auto-parts-stores-api
+  name: Advance Auto Parts Stores API
+  description: Store locations and availability
+  humanURL: https://www.advanceautoparts.com
+  baseURL: https://api.advanceautoparts.com/v1
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/advance-auto-parts-stores-api-openapi.yml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-catalog-api-context.jsonld
+  - type: SpectralRules
+    url: rules/advance-auto-parts-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advance-auto-parts-vocabulary.yaml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-commerce-api-context.jsonld
+- aid: advance-auto-parts:advance-auto-parts-vehicles-api
+  name: Advance Auto Parts Vehicles API
+  description: Vehicle year/make/model lookup and fitment
+  humanURL: https://www.advanceautoparts.com
+  baseURL: https://api.advanceautoparts.com/v1
+  tags:
+  - Vehicles
+  properties:
+  - type: OpenAPI
+    url: openapi/advance-auto-parts-vehicles-api-openapi.yml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-catalog-api-context.jsonld
+  - type: SpectralRules
+    url: rules/advance-auto-parts-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advance-auto-parts-vocabulary.yaml
+  - type: Documentation
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
+  - type: JSONLD
+    url: json-ld/advance-auto-parts-commerce-api-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/advance-auto-parts-agentic-access.yml
@@ -138,7 +279,7 @@ description: >-
   parts, accessories, batteries, and maintenance items. The company serves both professional automotive technicians and
   do-it-yourself customers across North America through retail stores, online, and commercial delivery programs.
 name: Advance Auto Parts
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/advance-auto-parts.png
 type: Index
 created: '2024-01-01'
 specificationVersion: '0.19'

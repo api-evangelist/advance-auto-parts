@@ -1,0 +1,26 @@
+{
+  "provider": "advance-auto-parts",
+  "sources": [
+    "advance-auto-parts-cart-api-openapi.yml",
+    "advance-auto-parts-inventory-api-openapi.yml",
+    "advance-auto-parts-loyalty-api-openapi.yml",
+    "advance-auto-parts-orders-api-openapi.yml",
+    "advance-auto-parts-products-api-openapi.yml",
+    "advance-auto-parts-stores-api-openapi.yml",
+    "advance-auto-parts-vehicles-api-openapi.yml"
+  ],
+  "outputs": [
+    "advance-auto-parts-cart-api-openapi.yml",
+    "advance-auto-parts-inventory-api-openapi.yml",
+    "advance-auto-parts-loyalty-api-openapi.yml",
+    "advance-auto-parts-orders-api-openapi.yml",
+    "advance-auto-parts-products-api-openapi.yml",
+    "advance-auto-parts-stores-api-openapi.yml",
+    "advance-auto-parts-vehicles-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

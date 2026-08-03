@@ -1,0 +1,650 @@
+openapi: 3.0.3
+info:
+  title: Advance Auto Parts Catalog API
+  description: >-
+    The Advance Auto Parts Catalog API provides programmatic access to the full product catalog
+    including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by
+    year/make/model/engine, part number searches, availability checks, pricing, and store
+    inventory queries for professional and DIY customers.
+  version: "1"
+  contact:
+    name: Advance Auto Parts Support
+    url: https://www.advanceautoparts.com/i/help/customer-service
+  termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+  license:
+    name: Advance Auto Parts Terms of Service
+    url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
+servers:
+  - url: https://api.advanceautoparts.com/v1
+    description: Advance Auto Parts Catalog API Production
+tags:
+  - name: Vehicles
+    description: Vehicle year/make/model lookup and fitment
+  - name: Products
+    description: Parts and product catalog
+  - name: Inventory
+    description: Store and warehouse inventory
+  - name: Stores
+    description: Store locations and availability
+security:
+  - apiKey: []
+paths:
+  /vehicles/years:
+    get:
+      operationId: getVehicleYears
+      summary: Advance Auto Parts List Vehicle Years
+      description: "Retrieve all available vehicle model years for fitment lookup."
+      tags:
+        - Vehicles
+      responses:
+        '200':
+          description: "List of vehicle years."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearList'
+              examples:
+                getVehicleYears200Example:
+                  summary: Default getVehicleYears 200 response
+                  x-microcks-default: true
+                  value:
+                    years:
+                      - 2024
+                      - 2023
+                      - 2022
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getVehicleYears401Example:
+                  summary: Default getVehicleYears 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vehicles/makes:
+    get:
+      operationId: getVehicleMakes
+      summary: Advance Auto Parts List Vehicle Makes
+      description: "Retrieve all available vehicle makes for a given model year."
+      tags:
+        - Vehicles
+      parameters:
+        - name: year
+          in: query
+          required: true
+          description: "Vehicle model year."
+          schema:
+            type: integer
+            example: 2022
+      responses:
+        '200':
+          description: "List of vehicle makes."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeList'
+              examples:
+                getVehicleMakes200Example:
+                  summary: Default getVehicleMakes 200 response
+                  x-microcks-default: true
+                  value:
+                    makes:
+                      - id: "FORD"
+                        name: "Ford"
+                      - id: "CHEV"
+                        name: "Chevrolet"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getVehicleMakes401Example:
+                  summary: Default getVehicleMakes 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vehicles/models:
+    get:
+      operationId: getVehicleModels
+      summary: Advance Auto Parts List Vehicle Models
+      description: "Retrieve all vehicle models for a given year and make."
+      tags:
+        - Vehicles
+      parameters:
+        - name: year
+          in: query
+          required: true
+          description: "Vehicle model year."
+          schema:
+            type: integer
+        - name: makeId
+          in: query
+          required: true
+          description: "Vehicle make identifier."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "List of vehicle models."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+              examples:
+                getVehicleModels200Example:
+                  summary: Default getVehicleModels 200 response
+                  x-microcks-default: true
+                  value:
+                    models:
+                      - id: "F150"
+                        name: "F-150"
+                      - id: "MUST"
+                        name: "Mustang"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getVehicleModels401Example:
+                  summary: Default getVehicleModels 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /products:
+    get:
+      operationId: searchProducts
+      summary: Advance Auto Parts Search Products
+      description: "Search the parts catalog by keyword, part number, or vehicle fitment parameters."
+      tags:
+        - Products
+      parameters:
+        - name: q
+          in: query
+          required: false
+          description: "Keyword search query."
+          schema:
+            type: string
+        - name: partNumber
+          in: query
+          required: false
+          description: "Specific part number to look up."
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: false
+          description: "Vehicle model year for fitment filter."
+          schema:
+            type: integer
+        - name: makeId
+          in: query
+          required: false
+          description: "Vehicle make ID for fitment filter."
+          schema:
+            type: string
+        - name: modelId
+          in: query
+          required: false
+          description: "Vehicle model ID for fitment filter."
+          schema:
+            type: string
+        - name: categoryId
+          in: query
+          required: false
+          description: "Product category ID to filter results."
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: "Maximum number of products to return."
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          required: false
+          description: "Pagination offset."
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: "Matching products."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+              examples:
+                searchProducts200Example:
+                  summary: Default searchProducts 200 response
+                  x-microcks-default: true
+                  value:
+                    products:
+                      - id: "SKU-123456"
+                        name: "Duralast Gold Brake Pad Set"
+                        partNumber: "MKD1083"
+                        brand: "Duralast Gold"
+                        price: 54.99
+                        available: true
+                    total: 1
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                searchProducts401Example:
+                  summary: Default searchProducts 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /products/{productId}:
+    get:
+      operationId: getProduct
+      summary: Advance Auto Parts Get Product Details
+      description: "Retrieve full product details including specifications, images, and compatibility notes."
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: "Product SKU or part number."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Product details."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples:
+                getProduct200Example:
+                  summary: Default getProduct 200 response
+                  x-microcks-default: true
+                  value:
+                    id: "SKU-123456"
+                    name: "Duralast Gold Brake Pad Set"
+                    partNumber: "MKD1083"
+                    brand: "Duralast Gold"
+                    description: "Semi-metallic brake pads for front axle"
+                    price: 54.99
+                    available: true
+                    categoryId: "brake-pads"
+        '404':
+          description: "Product not found."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getProduct404Example:
+                  summary: Default getProduct 404 response
+                  x-microcks-default: true
+                  value:
+                    code: "NOT_FOUND"
+                    message: "Product not found"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /inventory:
+    get:
+      operationId: checkInventory
+      summary: Advance Auto Parts Check Product Inventory
+      description: "Check availability and quantity of a product at nearby stores or warehouses."
+      tags:
+        - Inventory
+      parameters:
+        - name: productId
+          in: query
+          required: true
+          description: "Product SKU or part number."
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          required: false
+          description: "Specific store ID to check."
+          schema:
+            type: string
+        - name: zip
+          in: query
+          required: false
+          description: "ZIP code to find nearby stores."
+          schema:
+            type: string
+        - name: radius
+          in: query
+          required: false
+          description: "Search radius in miles."
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: "Inventory availability."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResult'
+              examples:
+                checkInventory200Example:
+                  summary: Default checkInventory 200 response
+                  x-microcks-default: true
+                  value:
+                    productId: "SKU-123456"
+                    stores:
+                      - storeId: "store-001"
+                        storeName: "Advance Auto Parts - Main St"
+                        quantity: 4
+                        available: true
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                checkInventory401Example:
+                  summary: Default checkInventory 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /stores:
+    get:
+      operationId: getStores
+      summary: Advance Auto Parts List Nearby Stores
+      description: "Find Advance Auto Parts store locations near a ZIP code or geographic coordinates."
+      tags:
+        - Stores
+      parameters:
+        - name: zip
+          in: query
+          required: false
+          description: "ZIP code to search near."
+          schema:
+            type: string
+        - name: lat
+          in: query
+          required: false
+          description: "Latitude coordinate."
+          schema:
+            type: number
+            format: float
+        - name: lon
+          in: query
+          required: false
+          description: "Longitude coordinate."
+          schema:
+            type: number
+            format: float
+        - name: radius
+          in: query
+          required: false
+          description: "Search radius in miles."
+          schema:
+            type: integer
+            default: 25
+        - name: limit
+          in: query
+          required: false
+          description: "Maximum number of stores to return."
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: "List of nearby stores."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreList'
+              examples:
+                getStores200Example:
+                  summary: Default getStores 200 response
+                  x-microcks-default: true
+                  value:
+                    stores:
+                      - id: "store-001"
+                        name: "Advance Auto Parts - Main St"
+                        address: "123 Main St, Springfield, IL 62701"
+                        phone: "217-555-0100"
+                        hours: "Mon-Sat 7:30AM-9PM, Sun 9AM-8PM"
+                        distance: 1.2
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getStores401Example:
+                  summary: Default getStores 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    YearList:
+      type: object
+      description: "List of available vehicle model years."
+      properties:
+        years:
+          type: array
+          description: "Array of model years."
+          items:
+            type: integer
+    MakeList:
+      type: object
+      description: "List of vehicle makes."
+      properties:
+        makes:
+          type: array
+          description: "Array of vehicle makes."
+          items:
+            $ref: '#/components/schemas/Make'
+    Make:
+      type: object
+      description: "A vehicle manufacturer."
+      properties:
+        id:
+          type: string
+          description: "Make identifier."
+          example: "FORD"
+        name:
+          type: string
+          description: "Make display name."
+          example: "Ford"
+    ModelList:
+      type: object
+      description: "List of vehicle models."
+      properties:
+        models:
+          type: array
+          description: "Array of vehicle models."
+          items:
+            $ref: '#/components/schemas/VehicleModel'
+    VehicleModel:
+      type: object
+      description: "A vehicle model."
+      properties:
+        id:
+          type: string
+          description: "Model identifier."
+          example: "F150"
+        name:
+          type: string
+          description: "Model display name."
+          example: "F-150"
+    Product:
+      type: object
+      description: "An automotive part or product."
+      properties:
+        id:
+          type: string
+          description: "Product SKU."
+          example: "SKU-123456"
+        name:
+          type: string
+          description: "Product name."
+          example: "Duralast Gold Brake Pad Set"
+        partNumber:
+          type: string
+          description: "Manufacturer part number."
+          example: "MKD1083"
+        brand:
+          type: string
+          description: "Brand name."
+          example: "Duralast Gold"
+        description:
+          type: string
+          description: "Product description."
+          example: "Semi-metallic brake pads for front axle."
+        price:
+          type: number
+          format: float
+          description: "Current retail price."
+          example: 54.99
+        available:
+          type: boolean
+          description: "Whether the product is available."
+          example: true
+        categoryId:
+          type: string
+          description: "Product category identifier."
+          example: "brake-pads"
+    ProductList:
+      type: object
+      description: "List of products matching search criteria."
+      properties:
+        products:
+          type: array
+          description: "Array of products."
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: "Total number of matching products."
+          example: 42
+    InventoryResult:
+      type: object
+      description: "Inventory availability result for a product across stores."
+      properties:
+        productId:
+          type: string
+          description: "Product SKU."
+          example: "SKU-123456"
+        stores:
+          type: array
+          description: "Store inventory records."
+          items:
+            $ref: '#/components/schemas/StoreInventory'
+    StoreInventory:
+      type: object
+      description: "Inventory at a specific store."
+      properties:
+        storeId:
+          type: string
+          description: "Store identifier."
+          example: "store-001"
+        storeName:
+          type: string
+          description: "Store display name."
+          example: "Advance Auto Parts - Main St"
+        quantity:
+          type: integer
+          description: "Available quantity."
+          example: 4
+        available:
+          type: boolean
+          description: "Whether in stock."
+          example: true
+    Store:
+      type: object
+      description: "An Advance Auto Parts retail store."
+      properties:
+        id:
+          type: string
+          description: "Store identifier."
+          example: "store-001"
+        name:
+          type: string
+          description: "Store name."
+          example: "Advance Auto Parts - Main St"
+        address:
+          type: string
+          description: "Street address."
+          example: "123 Main St, Springfield, IL 62701"
+        phone:
+          type: string
+          description: "Phone number."
+          example: "217-555-0100"
+        hours:
+          type: string
+          description: "Business hours."
+          example: "Mon-Sat 7:30AM-9PM, Sun 9AM-8PM"
+        distance:
+          type: number
+          format: float
+          description: "Distance from search location in miles."
+          example: 1.2
+    StoreList:
+      type: object
+      description: "List of nearby store locations."
+      properties:
+        stores:
+          type: array
+          description: "Array of store locations."
+          items:
+            $ref: '#/components/schemas/Store'
+    ErrorResponse:
+      type: object
+      description: "API error response."
+      properties:
+        code:
+          type: string
+          description: "Error code."
+          example: "NOT_FOUND"
+        message:
+          type: string
+          description: "Error message."
+          example: "The requested resource was not found."

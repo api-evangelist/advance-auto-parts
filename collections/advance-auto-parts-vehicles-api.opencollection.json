@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Advance Auto Parts Catalog Cart Vehicles API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advance Auto Parts List Vehicle Years",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/vehicles/years"
+          },
+          "docs": "Retrieve all available vehicle model years for fitment lookup."
+        },
+        {
+          "info": {
+            "name": "Advance Auto Parts List Vehicle Makes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/vehicles/makes",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model year."
+              }
+            ]
+          },
+          "docs": "Retrieve all available vehicle makes for a given model year."
+        },
+        {
+          "info": {
+            "name": "Advance Auto Parts List Vehicle Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/vehicles/models",
+            "params": [
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model year."
+              },
+              {
+                "name": "makeId",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle make identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve all vehicle models for a given year and make."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Advance Auto Parts Catalog Cart API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cart",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advance Auto Parts Get Current Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/cart"
+          },
+          "docs": "Retrieve the current shopping cart contents for the authenticated session."
+        },
+        {
+          "info": {
+            "name": "Advance Auto Parts Add Item to Cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.advanceautoparts.com/v1/cart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a product to the shopping cart."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

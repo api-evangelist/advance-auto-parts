@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Advance Auto Parts Catalog Cart Products API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advance Auto Parts Search Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/products",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Keyword search query."
+              },
+              {
+                "name": "partNumber",
+                "value": "",
+                "type": "query",
+                "description": "Specific part number to look up."
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model year for fitment filter."
+              },
+              {
+                "name": "makeId",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle make ID for fitment filter."
+              },
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "query",
+                "description": "Vehicle model ID for fitment filter."
+              },
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "query",
+                "description": "Product category ID to filter results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of products to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              }
+            ]
+          },
+          "docs": "Search the parts catalog by keyword, part number, or vehicle fitment parameters."
+        },
+        {
+          "info": {
+            "name": "Advance Auto Parts Get Product Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.advanceautoparts.com/v1/products/:productId",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product SKU or part number."
+              }
+            ]
+          },
+          "docs": "Retrieve full product details including specifications, images, and compatibility notes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

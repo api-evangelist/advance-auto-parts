@@ -282,7 +282,7 @@ name: Advance Auto Parts
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/advance-auto-parts.png
 type: Index
 created: '2024-01-01'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 tags:
   - Automotive
   - E-Commerce

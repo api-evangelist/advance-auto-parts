@@ -99,6 +99,8 @@ apis:
   humanURL: https://www.advanceautoparts.com
   baseURL: https://api.advanceautoparts.com/v1
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -125,6 +127,8 @@ apis:
   humanURL: https://www.advanceautoparts.com
   baseURL: https://api.advanceautoparts.com/v1
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI

@@ -214,6 +214,9 @@ apis:
   - type: JSONLD
     url: json-ld/advance-auto-parts-commerce-api-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/advance-auto-parts-capability-edges.yml
+    name: Advance Auto Parts Business Capability Map
   - type: AgenticAccess
     url: agentic-access/advance-auto-parts-agentic-access.yml
   - type: DomainSecurity

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Advance Auto Parts Catalog Cart API
   description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
@@ -116,38 +116,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CartItem:
-      type: object
-      description: An item in the shopping cart.
-      properties:
-        productId:
-          type: string
-          description: Product SKU.
-          example: SKU-123456
-        quantity:
-          type: integer
-          description: Quantity of the item.
-          example: 2
-        unitPrice:
-          type: number
-          format: float
-          description: Price per unit.
-          example: 54.99
-    CartItemInput:
-      type: object
-      description: Request to add an item to the cart.
-      required:
-      - productId
-      - quantity
-      properties:
-        productId:
-          type: string
-          description: Product SKU to add.
-          example: SKU-123456
-        quantity:
-          type: integer
-          description: Quantity to add.
-          example: 2
     Cart:
       type: object
       description: A shopping cart.
@@ -166,6 +134,21 @@ components:
           format: float
           description: Cart subtotal before tax.
           example: 109.98
+    CartItemInput:
+      type: object
+      description: Request to add an item to the cart.
+      required:
+      - productId
+      - quantity
+      properties:
+        productId:
+          type: string
+          description: Product SKU to add.
+          example: SKU-123456
+        quantity:
+          type: integer
+          description: Quantity to add.
+          example: 2
     ErrorResponse:
       type: object
       description: API error response.
@@ -178,6 +161,23 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    CartItem:
+      type: object
+      description: An item in the shopping cart.
+      properties:
+        productId:
+          type: string
+          description: Product SKU.
+          example: SKU-123456
+        quantity:
+          type: integer
+          description: Quantity of the item.
+          example: 2
+        unitPrice:
+          type: number
+          format: float
+          description: Price per unit.
+          example: 54.99
   securitySchemes:
     apiKey:
       type: apiKey

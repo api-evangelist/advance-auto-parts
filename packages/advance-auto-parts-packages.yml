@@ -1,0 +1,45 @@
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: Advance Auto Parts
+providerId: advance-auto-parts
+generated: '2026-08-30'
+method: searched
+source: >-
+  Unauthenticated registry searches of npm (registry.npmjs.org search API), PyPI
+  (pypi.org/pypi/<name>/json), RubyGems (rubygems.org/api/v1/gems), Packagist
+  (packagist.org/search.json), plus the AdvanceAutoParts GitHub organization
+  (github.com/AdvanceAutoParts, 1 public repo) on 2026-08-30.
+package_count: 0
+official_package_count: 0
+packages: []
+note: >-
+  Advance Auto Parts publishes NO first-party client library on any public package
+  registry. The npm search for "advance auto parts" and "advanceautoparts" returned no
+  package owned by the company; pypi.org/pypi/advance-auto-parts/json and
+  /advanceautoparts/json both returned 404; rubygems.org/api/v1/gems/advance_auto_parts.json
+  returned 404; packagist.org/search.json?q=advanceautoparts returned 0 results. The one
+  public repository in the AdvanceAutoParts GitHub organization is `datafastlane`, an
+  Apache Spark ETL tool last pushed 2023-07-07 — it is not an API client and ships no
+  registry artifact. Third-party scraper actors exist on Apify and GitHub
+  (lexis-solutions/advanceautoparts-scraper, RiseHaza/advanceautoparts-scraper) but they
+  are not first-party and are deliberately excluded. No `SDKs` pointer is emitted in
+  apis.yml because there is no SDK to point at.
+registries_probed:
+  - registry: npm
+    query: advanceautoparts
+    result: no first-party package
+  - registry: pypi
+    query: advance-auto-parts
+    status: 404
+  - registry: pypi
+    query: advanceautoparts
+    status: 404
+  - registry: rubygems
+    query: advance_auto_parts
+    status: 404
+  - registry: packagist
+    query: advanceautoparts
+    result: 0 results
+  - registry: github
+    query: org:AdvanceAutoParts
+    result: 1 public repo (datafastlane, Java/Spark ETL, last push 2023-07-07); no API client

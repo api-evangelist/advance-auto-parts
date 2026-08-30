@@ -1,0 +1,60 @@
+# Advance Auto Parts
+
+> Advance Auto Parts is a North American automotive aftermarket parts retailer serving
+> professional installers and DIY customers through retail stores, advanceautoparts.com,
+> and a commercial delivery program. It does not operate a public developer API program.
+
+Provenance: generated 2026-08-30 by API Evangelist from live probes of Advance Auto Parts'
+public hosts. This is a third-party profile, not a company publication. Advance Auto Parts
+serves no llms.txt of its own: https://www.advanceautoparts.com/llms.txt returns HTTP 200
+with a zero-byte body.
+
+## What an agent can and cannot do here
+
+- There is **no public API**. No OpenAPI, Swagger, GraphQL, AsyncAPI, gRPC or WSDL contract
+  is published at any Advance Auto Parts URL.
+- There is **no developer portal**. developer.advanceautoparts.com, api-docs.advanceautoparts.com
+  and partners.advanceautoparts.com have no DNS records.
+- `https://api.advanceautoparts.com` resolves to Akamai but returns HTTP 503
+  "Service Unavailable - DNS failure" on every path — do not attempt to call it.
+- `https://www.advanceautoparts.com` returns HTTP 200 with an empty body to non-browser
+  clients, including for /robots.txt. Automated retrieval of the storefront is not viable.
+- Integration with Advance Auto Parts is arranged commercially, not self-serve: ANSI X12
+  EDI for suppliers, and shop-management-system ordering integrations for professional
+  service shops.
+
+## Integration surfaces (all require a relationship or credentials)
+
+- [Advance Professional / MyAdvance partner community](https://my.advancepro.com/service/s/consumer-home?language=en_US):
+  Salesforce Experience Cloud portal for professional accounts. Ordering, promotions,
+  rewards. Content is client-rendered; a login is required for account functions.
+- [Shop management system (SMS) order integration](https://my.advancepro.com/service/s/apro-sms-order-integration-page?language=en_US):
+  the page describing parts ordering from inside shop management software. Renders
+  entirely client-side; no public API reference is exposed.
+- [Supplier portal](https://supplier.advanceautoparts.com/): Oracle APEX / ORDS portal for
+  vendors. All data paths redirect to a login (HTTP 302).
+- EDI: Advance Auto Parts trades ANSI ASC X12 version 004010 — 810 Invoice, 850 Purchase
+  Order, 855 PO Acknowledgment, 856 Ship Notice/Manifest, 860 PO Change Request, plus 846
+  and 852 per some networks. Advance Auto Parts publishes no implementation guide at a
+  public URL; the requirements are documented by EDI networks.
+
+## Security
+
+- [Vulnerability disclosure program](https://hackerone.com/advanceauto): HackerOne team
+  `advanceauto`, confirmed to belong to Advance Auto Parts. Note that no
+  /.well-known/security.txt is served on any company host, so this program is not
+  discoverable by RFC 9116.
+
+## Company
+
+- [Website](https://www.advanceautoparts.com)
+- [Help and customer service](https://www.advanceautoparts.com/i/help/customer-service)
+- [Terms of service](https://www.advanceautoparts.com/i/policies/terms-and-conditions)
+- [Privacy policy](https://www.advanceautoparts.com/i/policies/privacy)
+- [GitHub organization](https://github.com/AdvanceAutoParts) — 1 public repo, `datafastlane`,
+  an Apache Spark ETL tool, last pushed 2023-07-07. No API artifacts.
+
+## Optional
+
+- [API Evangelist profile](https://apis.io/providers/advance-auto-parts/) — the independent
+  third-party profile this file was generated from.

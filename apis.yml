@@ -214,6 +214,18 @@ apis:
   - type: JSONLD
     url: json-ld/advance-auto-parts-commerce-api-context.jsonld
 common:
+  - type: Packages
+    url: packages/advance-auto-parts-packages.yml
+  - type: VulnerabilityDisclosure
+    url: security/advance-auto-parts-vulnerability-disclosure.yml
+  - type: Security
+    url: security/advance-auto-parts-vulnerability-disclosure.yml
+  - type: Conformance
+    url: conformance/advance-auto-parts-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/advance-auto-parts-lifecycle.yml
+  - type: LLMsTxt
+    url: llms/advance-auto-parts-llms.txt
   - type: CapabilityMap
     url: capabilities/advance-auto-parts-capability-edges.yml
     name: Advance Auto Parts Business Capability Map
@@ -313,3 +325,28 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
     url: https://apievangelist.com
+x-enrichment:
+  date: '2026-08-30'
+  status: minimal
+  artifacts_added: 7
+  pass: local-v1
+x-coverage:
+  state: gated
+  reason: partner-login
+  detail: >-
+    Every Advance Auto Parts integration surface sits behind an account: the supplier
+    portal at supplier.advanceautoparts.com/ords redirects all data paths to a login, the
+    Advance Professional shop-management-system order integration page at my.advancepro.com
+    renders client-side inside a Salesforce community with no public API reference, and the
+    declared API host api.advanceautoparts.com answers HTTP 503 "DNS failure" from the
+    Akamai edge with no origin behind it.
+  evidence:
+    - url: https://api.advanceautoparts.com/openapi.json
+      status: 503
+    - url: https://supplier.advanceautoparts.com/ords/_/db-api/stable/apex/workspaces/
+      status: 302
+    - url: https://my.advancepro.com/service/s/apro-sms-order-integration-page?language=en_US
+      status: 200
+    - url: https://www.advanceautoparts.com/llms.txt
+      status: 200
+  checked: '2026-08-30'

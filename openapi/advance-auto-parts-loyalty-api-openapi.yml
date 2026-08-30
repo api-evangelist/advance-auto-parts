@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Advance Auto Parts Catalog Cart Loyalty API
   description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
@@ -117,15 +117,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LoyaltyTransactionList:
-      type: object
-      description: List of loyalty transactions.
-      properties:
-        transactions:
-          type: array
-          description: Array of transactions.
-          items:
-            $ref: '#/components/schemas/LoyaltyTransaction'
     LoyaltyTransaction:
       type: object
       description: A Speed Perks points transaction.
@@ -198,6 +189,15 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    LoyaltyTransactionList:
+      type: object
+      description: List of loyalty transactions.
+      properties:
+        transactions:
+          type: array
+          description: Array of transactions.
+          items:
+            $ref: '#/components/schemas/LoyaltyTransaction'
   securitySchemes:
     apiKey:
       type: apiKey

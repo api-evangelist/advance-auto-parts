@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Advance Auto Parts Catalog Cart Vehicles API
   description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
@@ -161,24 +161,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ModelList:
-      type: object
-      description: List of vehicle models.
-      properties:
-        models:
-          type: array
-          description: Array of vehicle models.
-          items:
-            $ref: '#/components/schemas/VehicleModel'
-    MakeList:
-      type: object
-      description: List of vehicle makes.
-      properties:
-        makes:
-          type: array
-          description: Array of vehicle makes.
-          items:
-            $ref: '#/components/schemas/Make'
     YearList:
       type: object
       description: List of available vehicle model years.
@@ -188,6 +170,24 @@ components:
           description: Array of model years.
           items:
             type: integer
+    MakeList:
+      type: object
+      description: List of vehicle makes.
+      properties:
+        makes:
+          type: array
+          description: Array of vehicle makes.
+          items:
+            $ref: '#/components/schemas/Make'
+    ModelList:
+      type: object
+      description: List of vehicle models.
+      properties:
+        models:
+          type: array
+          description: Array of vehicle models.
+          items:
+            $ref: '#/components/schemas/VehicleModel'
     ErrorResponse:
       type: object
       description: API error response.

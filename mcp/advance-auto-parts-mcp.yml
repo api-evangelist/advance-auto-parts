@@ -1,0 +1,28 @@
+specification: API Commons MCP
+specificationVersion: '0.1'
+provider: Advance Auto Parts
+providerId: advance-auto-parts
+generated: '2026-08-30'
+method: searched
+source: >-
+  Searches for an Advance Auto Parts hosted or packaged MCP server across npm, PyPI and the
+  AdvanceAutoParts GitHub organization, plus probes of every company host, 2026-08-30.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+server:
+  present: false
+tools: []
+note: >-
+  Advance Auto Parts ships no MCP server, remote or local. No npm or PyPI package is
+  published by the company at all (see packages/), the single public GitHub repo is a Spark
+  ETL tool, and no /mcp endpoint or agent card was found on any host. NO candidate tool list
+  was derived: the only OpenAPI files in this repository describe
+  api.advanceautoparts.com, a host that answers HTTP 503 "DNS failure" from the Akamai edge
+  and has no origin behind it, so deriving tools from them would manufacture an agent
+  surface for an API that does not answer. NO MCPServer pointer is emitted in apis.yml —
+  this file records the absence for the deployment-mode census.

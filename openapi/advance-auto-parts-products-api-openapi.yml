@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Advance Auto Parts Catalog Cart Products API
   description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
@@ -165,6 +165,31 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    ProductList:
+      type: object
+      description: List of products matching search criteria.
+      properties:
+        products:
+          type: array
+          description: Array of products.
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: Total number of matching products.
+          example: 42
     Product:
       type: object
       description: An automotive part or product.
@@ -202,31 +227,6 @@ components:
           type: string
           description: Product category identifier.
           example: brake-pads
-    ProductList:
-      type: object
-      description: List of products matching search criteria.
-      properties:
-        products:
-          type: array
-          description: Array of products.
-          items:
-            $ref: '#/components/schemas/Product'
-        total:
-          type: integer
-          description: Total number of matching products.
-          example: 42
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
   securitySchemes:
     apiKey:
       type: apiKey

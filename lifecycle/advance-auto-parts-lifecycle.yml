@@ -1,0 +1,44 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: Advance Auto Parts
+providerId: advance-auto-parts
+generated: '2026-08-30'
+method: probed
+source: >-
+  DNS and HTTPS probes for a status page, versioning policy, deprecation policy and
+  changelog on every Advance Auto Parts host, 2026-08-30.
+status_page:
+  present: false
+  evidence: >-
+    status.advanceautoparts.com has no DNS record (NXDOMAIN). No Statuspage,
+    Better Stack or equivalent tenant was found for the company, and no status link is
+    reachable from any probed host. NO StatusPage pointer is emitted.
+versioning:
+  policy_published: false
+  scheme: unknown
+  evidence: >-
+    No public API reference exists to state a versioning scheme. The `/v1` path segment in
+    this repository's declared baseURL comes from repo-local OpenAPI files, not from an
+    Advance Auto Parts publication, and its host does not serve (HTTP 503).
+deprecation:
+  policy_published: false
+  sunset_header: unknown
+  rfc8594: false
+  evidence: >-
+    No deprecation policy, no Sunset or Deprecation header documentation, and no deprecated
+    operations verifiable against a published contract. NO Deprecation pointer is emitted.
+sla:
+  published: false
+  evidence: >-
+    No public SLA. Integration terms are set inside supplier and Advance Professional
+    partner agreements, both of which sit behind a login.
+changelog:
+  published: false
+  evidence: >-
+    No dated API changelog or release-notes surface was reachable on any host. The
+    MyAdvance / Advance Professional community (my.advancepro.com) publishes a sitemap of
+    38+ marketing pages but no changelog page among them.
+note: >-
+  Every lifecycle signal an integrator needs — status, versioning, deprecation, SLA,
+  changelog — is absent from Advance Auto Parts' public surface. This is a recorded
+  absence built from live probes, not an untried check.

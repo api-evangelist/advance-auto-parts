@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Advance Auto Parts Catalog Cart Stores API
   description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
@@ -98,6 +98,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    StoreList:
+      type: object
+      description: List of nearby store locations.
+      properties:
+        stores:
+          type: array
+          description: Array of store locations.
+          items:
+            $ref: '#/components/schemas/Store'
     Store:
       type: object
       description: An Advance Auto Parts retail store.
@@ -127,27 +148,6 @@ components:
           format: float
           description: Distance from search location in miles.
           example: 1.2
-    StoreList:
-      type: object
-      description: List of nearby store locations.
-      properties:
-        stores:
-          type: array
-          description: Array of store locations.
-          items:
-            $ref: '#/components/schemas/Store'
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
   securitySchemes:
     apiKey:
       type: apiKey

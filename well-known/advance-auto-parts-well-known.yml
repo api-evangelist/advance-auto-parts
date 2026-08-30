@@ -1,0 +1,115 @@
+specification: API Commons Well-Known
+specificationVersion: '0.1'
+provider: Advance Auto Parts
+providerId: advance-auto-parts
+generated: '2026-08-30'
+method: probed
+source: >-
+  Direct unauthenticated HTTPS probes of every host named in apis.yml, in the repo's
+  OpenAPI servers[] blocks, and of the two partner/supplier hosts found by search
+  (supplier.advanceautoparts.com, my.advancepro.com).
+note: >-
+  NO HIT. Not one host serves a real /.well-known/ document. Three distinct
+  non-answers were observed and each is recorded verbatim below rather than collapsed
+  into a 404: www.advanceautoparts.com answers HTTP 200 with a ZERO-BYTE body for every
+  path including /robots.txt (Akamai bot mitigation — a 200 that is not a document);
+  shop.advanceautoparts.com answers HTTP 200 with the same 6,138-byte HTML shell for
+  every /.well-known/* path (soft-404 SPA catch-all — also not a document);
+  api.advanceautoparts.com answers HTTP 503 "Service Unavailable - DNS failure" from the
+  Akamai edge for every path, i.e. the hostname resolves to Akamai but no origin is
+  mapped behind it. Because nothing returned a real document, NO WellKnown and NO
+  SecurityTxt pointer is emitted in apis.yml. This file records a verified absence.
+hosts:
+  - host: www.advanceautoparts.com
+    note: HTTP 200 with a zero-byte body on every path (Akamai bot mitigation); not a document.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        result: empty-body
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        result: empty-body
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        result: empty-body
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        result: empty-body
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        result: empty-body
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        result: empty-body
+  - host: shop.advanceautoparts.com
+    note: HTTP 200 returning an identical 6,138-byte HTML shell on every path (soft-404).
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        result: html-shell
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        result: html-shell
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        result: html-shell
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        result: html-shell
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        result: html-shell
+  - host: api.advanceautoparts.com
+    note: >-
+      Declared baseURL host for all seven APIs in apis.yml. Resolves to Akamai
+      (e1199.x.akamaiedge.net) but every request returns HTTP 503
+      "Service Unavailable - DNS failure" — no origin is mapped behind the edge.
+    documents:
+      - path: /.well-known/security.txt
+        status: 503
+        file: null
+      - path: /.well-known/api-catalog
+        status: 503
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 503
+        file: null
+  - host: supplier.advanceautoparts.com
+    note: >-
+      Oracle APEX / ORDS supplier portal (Tomcat). Honest 404s — this host returns a real
+      404 page rather than a shell, so these absences are trustworthy.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: my.advancepro.com
+    note: >-
+      MyAdvance / Advance Professional partner community (Salesforce Experience Cloud).
+      /.well-known/* returns HTTP 401 from the Salesforce edge.
+    documents:
+      - path: /.well-known/security.txt
+        status: 401
+        file: null

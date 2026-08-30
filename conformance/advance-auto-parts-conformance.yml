@@ -1,0 +1,153 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Advance Auto Parts
+providerId: advance-auto-parts
+generated: '2026-08-30'
+method: searched
+source: >-
+  Live contract-discovery probes of every host in apis.yml plus the partner and supplier
+  hosts found by search, and the public EDI trading-partner directories that publish
+  Advance Auto Parts' X12 requirements (Stedi, Cleo, TrueCommerce, EDIXT).
+summary: >-
+  Advance Auto Parts publishes no machine-readable API contract of any kind on any host it
+  controls. The only standards signature that is real and independently attested is ANSI
+  ASC X12 EDI at version 004010 for supply-chain trading — and even that is documented by
+  EDI networks rather than by Advance Auto Parts itself, so it is recorded here as
+  attested-but-unverified rather than as a conformance the contract declares.
+conformance:
+  - id: x12-edi
+    name: ANSI ASC X12 EDI (004010)
+    domain: retail-supply-chain
+    conforms: false
+    status: attested-not-published
+    evidence: >-
+      Five X12 transaction sets are published as Advance Auto Parts requirements by the
+      Stedi EDI Network — X12 810 Invoice, 850 Purchase Order, 855 Purchase Order
+      Acknowledgment, 856 Ship Notice/Manifest and 860 Purchase Order Change Request
+      (Buyer Initiated) — all at release 004010. Cleo, TrueCommerce and EDIXT list the same
+      partnership plus 846 Inventory Inquiry/Advice and 852 Product Activity Data. Advance
+      Auto Parts itself publishes NO EDI implementation guide at a public URL: the Stedi
+      page states plainly that trading "requires exchanging electronic EDI documents that
+      meet Advance Auto Parts's specifications" while linking to no Advance Auto Parts
+      resource, and supplier.advanceautoparts.com/ords redirects every API path to a login
+      (HTTP 302). `conforms` is therefore false — the standard is real and the trading
+      relationship is real, but no Advance Auto Parts-published artifact declares it, which
+      is exactly the distinction domain_standard_conformance is meant to draw.
+    sources:
+      - https://www.stedi.com/edi/network/advance-auto-parts
+      - https://www.cleo.com/trading-partner-network/advance-auto-parts/
+      - https://www.truecommerce.com/trading-partner-network/advance-auto-parts/
+  - id: aces-pies
+    name: Auto Care Association ACES / PIES
+    domain: automotive-aftermarket
+    conforms: false
+    status: not-verified
+    evidence: >-
+      ACES (vehicle fitment) and PIES (product information) are the governing catalog data
+      standards for the US automotive aftermarket and are the standards a parts retailer of
+      this size would exchange with suppliers. No Advance Auto Parts-published artifact
+      naming ACES or PIES was reachable in this pass; the reference is carried only in this
+      repo's own apis.yml Integrations block, which is not provider-published evidence and
+      is explicitly not treated as such here.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    status: not-verified
+    evidence: >-
+      The OAuth 2.0 flows recorded in authentication/ and scopes/ derive from OpenAPI files
+      in this repository, not from Advance Auto Parts. Their declared authorization and
+      token hosts (auth.advanceautoparts.com) have NO DNS record at all — `dig
+      auth.advanceautoparts.com` returns empty — so no OAuth 2.0 conformance can be
+      asserted. See contract_discovery below.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    status: not-verified
+    evidence: No public error reference or contract is reachable to assert a problem+json envelope.
+  - id: openapi
+    name: OpenAPI Specification
+    conforms: false
+    status: not-published
+    evidence: >-
+      No OpenAPI or Swagger document is served by Advance Auto Parts on any host. Full
+      probe record in contract_discovery below.
+contract_discovery:
+  note: >-
+    STEP 0b contract discovery, run 2026-08-30. Every candidate location was probed once
+    with a browser User-Agent over HTTP/1.1. THE RESULT IS A VERIFIED ABSENCE, and it
+    carries a second finding that matters more than the absence itself: the declared API
+    host in this repository does not serve, and the declared OAuth host does not exist.
+  probes:
+    - url: https://api.advanceautoparts.com/openapi.json
+      status: 503
+      result: Akamai "Service Unavailable - DNS failure" — hostname resolves to Akamai, no origin mapped
+    - url: https://api.advanceautoparts.com/swagger.json
+      status: 503
+      result: same
+    - url: https://api.advanceautoparts.com/v1
+      status: 503
+      result: same — this is the baseURL declared for all seven APIs in apis.yml
+    - url: https://api.advanceautoparts.com/commerce/v1/
+      status: 503
+      result: same
+    - host: auth.advanceautoparts.com
+      status: NXDOMAIN
+      result: >-
+        No DNS record. This is the host the repo's derived authentication/ and scopes/
+        artifacts name as the OAuth authorization and token endpoint. It has never resolved.
+    - host: developer.advanceautoparts.com
+      status: NXDOMAIN
+    - host: api-docs.advanceautoparts.com
+      status: NXDOMAIN
+    - host: partners.advanceautoparts.com
+      status: NXDOMAIN
+    - host: status.advanceautoparts.com
+      status: NXDOMAIN
+    - url: https://www.advanceautoparts.com/llms.txt
+      status: 200
+      result: zero-byte body — not a document
+    - url: https://www.advanceautoparts.com/robots.txt
+      status: 200
+      result: zero-byte body — Akamai serves an empty 200 to every automated client
+    - url: https://supplier.advanceautoparts.com/ords/_/db-api/stable/metadata-catalog/
+      status: 200
+      result: >-
+        REAL OPENAPI FOUND BUT DEFERRED ON OWNERSHIP. This Oracle APEX/ORDS deployment
+        serves an anonymous OpenAPI 3.0.0 document at
+        /ords/_/db-api/stable/metadata-catalog/openapi.json (HTTP 200,
+        application/vnd.oai.openapi+json, 589 KB, 224 paths / 303 operations). It is NOT
+        saved to openapi/ and NOT wired into apis.yml because it fails the STEP 0c
+        ownership test on its own self-description: info.title is "ORDS Database API",
+        info.contact.name is "Oracle REST Data Services" pointing at oracle.com, and the
+        description states it is "A Database Management and Monitoring REST API embedded
+        into Oracle REST Data Services". It is Oracle's product contract shipped with the
+        ORDS runtime, incidentally exposed on an Advance Auto Parts hostname — crediting
+        Advance Auto Parts with 303 operations they did not author would be the same class
+        of error the Leadpages/htmlpub case documented.
+    - url: https://supplier.advanceautoparts.com/ords/_/db-api/stable/apex/workspaces/
+      status: 302
+      result: redirects to login — the ORDS operations themselves are authenticated, only the metadata catalog is anonymous
+    - url: https://my.advancepro.com/services/data
+      status: 200
+      result: >-
+        Salesforce platform REST API version list on the MyAdvance / Advance Professional
+        community host. Same ownership verdict as ORDS — this is Salesforce Experience
+        Cloud's own API surface, not an Advance Auto Parts contract.
+    - url: https://my.advancepro.com/service/s/apro-sms-order-integration-page?language=en_US
+      status: 200
+      result: >-
+        The shop-management-system order integration page — the real integration surface —
+        renders entirely client-side (Salesforce Aura). An unauthenticated fetch returns a
+        loading shell with no integration detail, no partner list and no API reference.
+    - url: https://api.github.com/orgs/AdvanceAutoParts/repos
+      status: 200
+      result: 1 public repo (datafastlane, Spark ETL, last push 2023-07-07) — no spec, no .proto, no client
+    - url: https://api.advanceautoparts.com/?wsdl
+      status: 503
+      result: no SOAP contract
+    - url: https://supplier.advanceautoparts.com/ords/?wsdl
+      status: 302
+      result: login redirect; no SOAP contract served anonymously
+    - path: /.well-known/agent-card.json and /.well-known/agent.json on all five hosts
+      status: 200 empty / 200 html-shell / 503 / 404 / 401
+      result: no A2A agent card on any host; nothing written to a2a/

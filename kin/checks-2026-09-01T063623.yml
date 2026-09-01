@@ -1,21 +1,21 @@
 ---
 kin_checks:
   slug: advance-auto-parts
-  schema_version: 0.16.0
-  scored_at: '2026-08-29'
-  run_ts: 2026-08-29T230545
+  schema_version: 0.17.2
+  scored_at: '2026-09-01'
+  run_ts: 2026-09-01T063623
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.16.0.yml; counts below let you verify that.
+    in rubric/scoring-0.17.2.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 40
-    partial: 18
-    missed: 48
+    earned: 43
+    partial: 19
+    missed: 44
     na: 24
   checks:
-  - id: well_known_published
+  - id: multiple_apis
     status: missed
-  - id: llms_txt_published
+  - id: well_known_published
     status: missed
   - id: apis_json_self_hosted
     status: missed
@@ -50,8 +50,6 @@ kin_checks:
     status: missed
   - id: deprecation_policy
     status: missed
-  - id: security_disclosure
-    status: missed
   - id: webhooks_advertised
     status: missed
   - id: roadmap_present
@@ -82,21 +80,15 @@ kin_checks:
     status: missed
   - id: trust_center
     status: missed
-  - id: reg_vulnerability_disclosure
-    status: missed
   - id: reg_compliance_published
     status: missed
   - id: reversibility_documented
-    status: missed
-  - id: mcp_server
     status: missed
   - id: idempotency
     status: missed
   - id: event_surface_described
     status: missed
   - id: agent_skills
-    status: missed
-  - id: well_known_catalog
     status: missed
   - id: consent_identity
     status: missed
@@ -171,6 +163,10 @@ kin_checks:
     status: partial
     earned: 2.5
     detail: 'authorship: derived'
+  - id: mcp_server
+    status: partial
+    earned: 4.8
+    detail: 'grade: documented'
   - id: auth_clarity
     status: partial
     earned: 3.5

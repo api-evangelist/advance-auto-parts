@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 3
 edges:
 - tag: Loyalty
   spec_file: advance-auto-parts-loyalty-api-openapi.yml
@@ -23,3 +23,26 @@ edges:
     schemas LoyaltyAccount, LoyaltyTransaction
   reason: Operations expose a customer loyalty account and its point/reward transactions, which is loyalty
     programme administration under Customer Relationship Management.
+- tag: Inventory
+  spec_file: advance-auto-parts-inventory-api-openapi.yml
+  capability_id: BC-530
+  capability_id_l1: BC-530
+  capability_name: Inventory Management
+  confidence: 0.7
+  evidence: '"GET /inventory checkInventory Advance Auto Parts Check Product Inventory"; schemas StoreInventory,
+    InventoryResult; "store inventory queries"'
+  reason: Availability/stock visibility by store is inventory management; the read-only surface does not
+    identify a specific sub-capability such as replenishment or accuracy.
+  recovered_from: vertical-retail-consumer-goods-edges.json
+- tag: Products
+  spec_file: advance-auto-parts-products-api-openapi.yml
+  capability_id: BC-2370
+  capability_id_l1: BC-2370
+  capability_name: Product Information Management
+  confidence: 0.7
+  evidence: '"GET /products searchProducts"; "GET /products/{productId} getProduct Advance Auto Parts
+    Get Product Details"; "programmatic access to the full product catalog including parts, accessories,
+    batteries, and fluids"'
+  reason: Exposes the retailer's authoritative product catalogue records; product information provision,
+    but read-only search does not pin a specific sub-capability.
+  recovered_from: vertical-retail-consumer-goods-edges.json

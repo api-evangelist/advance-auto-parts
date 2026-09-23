@@ -1,7 +1,9 @@
 ---
 title: Shweta Bhatia - Advance Auto Parts
 url: https://www.linkedin.com/in/shweta-bhatia25
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Advance Auto Parts" press release artificial intelligence'
 position: 3
 source: serpapi-google

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Advance Auto Parts Catalog Cart Vehicles API
+  title: Advance Auto Parts Catalog Vehicles API
   description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
   version: '1'
   contact:
@@ -161,15 +161,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    YearList:
-      type: object
-      description: List of available vehicle model years.
-      properties:
-        years:
-          type: array
-          description: Array of model years.
-          items:
-            type: integer
     MakeList:
       type: object
       description: List of vehicle makes.
@@ -188,18 +179,6 @@ components:
           description: Array of vehicle models.
           items:
             $ref: '#/components/schemas/VehicleModel'
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
     VehicleModel:
       type: object
       description: A vehicle model.
@@ -212,6 +191,15 @@ components:
           type: string
           description: Model display name.
           example: F-150
+    YearList:
+      type: object
+      description: List of available vehicle model years.
+      properties:
+        years:
+          type: array
+          description: Array of model years.
+          items:
+            type: integer
     Make:
       type: object
       description: A vehicle manufacturer.
@@ -224,6 +212,18 @@ components:
           type: string
           description: Make display name.
           example: Ford
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
   securitySchemes:
     apiKey:
       type: apiKey

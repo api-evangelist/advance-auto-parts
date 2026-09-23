@@ -1,7 +1,9 @@
 ---
 title: Advance Auto Parts reshapes footprint and 2025 results
 url: https://www.stocktitan.net/sec-filings/AAP/10-k-advance-auto-parts-inc-files-annual-report-a1f015e6e77e.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Advance Auto Parts" press release artificial intelligence'
 position: 5
 source: serpapi-google

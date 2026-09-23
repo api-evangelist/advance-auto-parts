@@ -1,20 +1,20 @@
 openapi: 3.2.0
 info:
-  title: Advance Auto Parts Catalog Cart Loyalty API
-  description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+  title: Advance Auto Parts Commerce Loyalty API
+  description: The Advance Auto Parts Commerce API enables ordering, cart management, loyalty program integration, and order fulfillment for commercial accounts. Supports creating orders, managing Speed Perks loyalty points, tracking shipments, and accessing purchase history for fleet and professional installer accounts.
   version: '1'
   contact:
-    name: Advance Auto Parts Support
-    url: https://www.advanceautoparts.com/i/help/customer-service
+    name: Advance Auto Parts Commercial Support
+    url: https://www.advanceautoparts.com/i/help/commercial-accounts
   termsOfService: https://www.advanceautoparts.com/i/policies/terms-and-conditions
   license:
     name: Advance Auto Parts Terms of Service
     url: https://www.advanceautoparts.com/i/policies/terms-and-conditions
 servers:
-- url: https://api.advanceautoparts.com/v1
-  description: Advance Auto Parts Catalog API Production
+- url: https://api.advanceautoparts.com/commerce/v1
+  description: Advance Auto Parts Commerce API Production
 security:
-- apiKey: []
+- oauth2: []
 tags:
 - name: Loyalty
   description: Speed Perks loyalty program
@@ -117,36 +117,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LoyaltyTransaction:
+    LoyaltyTransactionList:
       type: object
-      description: A Speed Perks points transaction.
+      description: List of loyalty transactions.
       properties:
-        id:
+        transactions:
+          type: array
+          description: Array of transactions.
+          items:
+            $ref: '#/components/schemas/LoyaltyTransaction'
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
           type: string
-          description: Transaction ID.
-          example: txn-001
-        type:
+          description: Error code.
+          example: NOT_FOUND
+        message:
           type: string
-          description: Transaction type.
-          enum:
-          - earn
-          - redeem
-          - expire
-          - adjust
-          example: earn
-        points:
-          type: integer
-          description: Points earned or redeemed.
-          example: 100
-        description:
-          type: string
-          description: Transaction description.
-          example: 'Purchase #order-001'
-        date:
-          type: string
-          format: date-time
-          description: Transaction date.
-          example: '2026-04-01T10:30:00Z'
+          description: Error message.
+          example: The requested resource was not found.
     LoyaltyAccount:
       type: object
       description: A Speed Perks loyalty account.
@@ -177,29 +168,45 @@ components:
           format: float
           description: Dollar value of available rewards.
           example: 5.0
-    ErrorResponse:
+    LoyaltyTransaction:
       type: object
-      description: API error response.
+      description: A Speed Perks points transaction.
       properties:
-        code:
+        id:
           type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
+          description: Transaction ID.
+          example: txn-001
+        type:
           type: string
-          description: Error message.
-          example: The requested resource was not found.
-    LoyaltyTransactionList:
-      type: object
-      description: List of loyalty transactions.
-      properties:
-        transactions:
-          type: array
-          description: Array of transactions.
-          items:
-            $ref: '#/components/schemas/LoyaltyTransaction'
+          description: Transaction type.
+          enum:
+          - earn
+          - redeem
+          - expire
+          - adjust
+          example: earn
+        points:
+          type: integer
+          description: Points earned or redeemed.
+          example: 100
+        description:
+          type: string
+          description: Transaction description.
+          example: 'Purchase #order-001'
+        date:
+          type: string
+          format: date-time
+          description: Transaction date.
+          example: '2026-04-01T10:30:00Z'
   securitySchemes:
-    apiKey:
-      type: apiKey
-      in: header
-      name: X-API-Key
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.advanceautoparts.com/oauth/authorize
+          tokenUrl: https://auth.advanceautoparts.com/oauth/token
+          scopes:
+            catalog:read: Read product catalog
+            orders:read: Read order history
+            orders:write: Place and manage orders
+            loyalty:read: Read loyalty account

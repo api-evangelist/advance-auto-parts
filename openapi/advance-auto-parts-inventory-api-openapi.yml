@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Advance Auto Parts Catalog Cart Inventory API
+  title: Advance Auto Parts Catalog Inventory API
   description: The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
   version: '1'
   contact:
@@ -88,26 +88,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    StoreInventory:
-      type: object
-      description: Inventory at a specific store.
-      properties:
-        storeId:
-          type: string
-          description: Store identifier.
-          example: store-001
-        storeName:
-          type: string
-          description: Store display name.
-          example: Advance Auto Parts - Main St
-        quantity:
-          type: integer
-          description: Available quantity.
-          example: 4
-        available:
-          type: boolean
-          description: Whether in stock.
-          example: true
     InventoryResult:
       type: object
       description: Inventory availability result for a product across stores.
@@ -133,6 +113,26 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    StoreInventory:
+      type: object
+      description: Inventory at a specific store.
+      properties:
+        storeId:
+          type: string
+          description: Store identifier.
+          example: store-001
+        storeName:
+          type: string
+          description: Store display name.
+          example: Advance Auto Parts - Main St
+        quantity:
+          type: integer
+          description: Available quantity.
+          example: 4
+        available:
+          type: boolean
+          description: Whether in stock.
+          example: true
   securitySchemes:
     apiKey:
       type: apiKey

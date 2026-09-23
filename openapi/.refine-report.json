@@ -1,28 +1,34 @@
 {
   "provider": "advance-auto-parts",
   "sources": [
-    "advance-auto-parts-cart-api-openapi.yml",
-    "advance-auto-parts-inventory-api-openapi.yml",
-    "advance-auto-parts-loyalty-api-openapi.yml",
-    "advance-auto-parts-orders-api-openapi.yml",
-    "advance-auto-parts-products-api-openapi.yml",
-    "advance-auto-parts-stores-api-openapi.yml",
-    "advance-auto-parts-vehicles-api-openapi.yml"
+    "_original/advance-auto-parts-catalog-api-openapi.yml",
+    "_original/advance-auto-parts-commerce-api-openapi.yml"
   ],
   "outputs": [
-    "advance-auto-parts-cart-api-openapi.yml",
     "advance-auto-parts-inventory-api-openapi.yml",
-    "advance-auto-parts-loyalty-api-openapi.yml",
-    "advance-auto-parts-orders-api-openapi.yml",
     "advance-auto-parts-products-api-openapi.yml",
     "advance-auto-parts-stores-api-openapi.yml",
-    "advance-auto-parts-vehicles-api-openapi.yml"
+    "advance-auto-parts-vehicles-api-openapi.yml",
+    "advance-auto-parts-cart-api-openapi.yml",
+    "advance-auto-parts-loyalty-api-openapi.yml",
+    "advance-auto-parts-orders-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "advance-auto-parts-catalog-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "advance-auto-parts-commerce-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "advance-auto-parts-cart-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advance-auto-parts-inventory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advance-auto-parts-loyalty-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advance-auto-parts-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advance-auto-parts-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advance-auto-parts-stores-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advance-auto-parts-vehicles-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

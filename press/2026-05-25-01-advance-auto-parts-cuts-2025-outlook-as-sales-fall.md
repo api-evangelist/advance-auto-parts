@@ -1,7 +1,9 @@
 ---
 title: Advance Auto Parts Cuts 2025 Outlook As Sales Fall
 url: https://www.wsj.com/business/earnings/advance-auto-parts-cuts-2025-outlook-amid-weaker-results-4dbf7195
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Advance Auto Parts" press release artificial intelligence'
 position: 1
 source: serpapi-google

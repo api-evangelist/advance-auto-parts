@@ -161,15 +161,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    MakeList:
-      type: object
-      description: List of vehicle makes.
-      properties:
-        makes:
-          type: array
-          description: Array of vehicle makes.
-          items:
-            $ref: '#/components/schemas/Make'
     ModelList:
       type: object
       description: List of vehicle models.
@@ -179,18 +170,6 @@ components:
           description: Array of vehicle models.
           items:
             $ref: '#/components/schemas/VehicleModel'
-    VehicleModel:
-      type: object
-      description: A vehicle model.
-      properties:
-        id:
-          type: string
-          description: Model identifier.
-          example: F150
-        name:
-          type: string
-          description: Model display name.
-          example: F-150
     YearList:
       type: object
       description: List of available vehicle model years.
@@ -212,6 +191,18 @@ components:
           type: string
           description: Make display name.
           example: Ford
+    VehicleModel:
+      type: object
+      description: A vehicle model.
+      properties:
+        id:
+          type: string
+          description: Model identifier.
+          example: F150
+        name:
+          type: string
+          description: Model display name.
+          example: F-150
     ErrorResponse:
       type: object
       description: API error response.
@@ -224,6 +215,15 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    MakeList:
+      type: object
+      description: List of vehicle makes.
+      properties:
+        makes:
+          type: array
+          description: Array of vehicle makes.
+          items:
+            $ref: '#/components/schemas/Make'
   securitySchemes:
     apiKey:
       type: apiKey

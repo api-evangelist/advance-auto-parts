@@ -202,6 +202,18 @@ components:
           type: string
           description: Product category identifier.
           example: brake-pads
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
     ProductList:
       type: object
       description: List of products matching search criteria.
@@ -215,18 +227,6 @@ components:
           type: integer
           description: Total number of matching products.
           example: 42
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
   securitySchemes:
     apiKey:
       type: apiKey

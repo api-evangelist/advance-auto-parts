@@ -161,24 +161,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ModelList:
-      type: object
-      description: List of vehicle models.
-      properties:
-        models:
-          type: array
-          description: Array of vehicle models.
-          items:
-            $ref: '#/components/schemas/VehicleModel'
-    YearList:
-      type: object
-      description: List of available vehicle model years.
-      properties:
-        years:
-          type: array
-          description: Array of model years.
-          items:
-            type: integer
     Make:
       type: object
       description: A vehicle manufacturer.
@@ -191,18 +173,6 @@ components:
           type: string
           description: Make display name.
           example: Ford
-    VehicleModel:
-      type: object
-      description: A vehicle model.
-      properties:
-        id:
-          type: string
-          description: Model identifier.
-          example: F150
-        name:
-          type: string
-          description: Model display name.
-          example: F-150
     ErrorResponse:
       type: object
       description: API error response.
@@ -215,6 +185,36 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    YearList:
+      type: object
+      description: List of available vehicle model years.
+      properties:
+        years:
+          type: array
+          description: Array of model years.
+          items:
+            type: integer
+    VehicleModel:
+      type: object
+      description: A vehicle model.
+      properties:
+        id:
+          type: string
+          description: Model identifier.
+          example: F150
+        name:
+          type: string
+          description: Model display name.
+          example: F-150
+    ModelList:
+      type: object
+      description: List of vehicle models.
+      properties:
+        models:
+          type: array
+          description: Array of vehicle models.
+          items:
+            $ref: '#/components/schemas/VehicleModel'
     MakeList:
       type: object
       description: List of vehicle makes.

@@ -98,27 +98,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    StoreList:
-      type: object
-      description: List of nearby store locations.
-      properties:
-        stores:
-          type: array
-          description: Array of store locations.
-          items:
-            $ref: '#/components/schemas/Store'
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
     Store:
       type: object
       description: An Advance Auto Parts retail store.
@@ -148,6 +127,27 @@ components:
           format: float
           description: Distance from search location in miles.
           example: 1.2
+    StoreList:
+      type: object
+      description: List of nearby store locations.
+      properties:
+        stores:
+          type: array
+          description: Array of store locations.
+          items:
+            $ref: '#/components/schemas/Store'
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
   securitySchemes:
     apiKey:
       type: apiKey

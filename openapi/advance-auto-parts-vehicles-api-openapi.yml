@@ -161,18 +161,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Make:
+    MakeList:
       type: object
-      description: A vehicle manufacturer.
+      description: List of vehicle makes.
       properties:
-        id:
-          type: string
-          description: Make identifier.
-          example: FORD
-        name:
-          type: string
-          description: Make display name.
-          example: Ford
+        makes:
+          type: array
+          description: Array of vehicle makes.
+          items:
+            $ref: '#/components/schemas/Make'
     ErrorResponse:
       type: object
       description: API error response.
@@ -185,6 +182,15 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    ModelList:
+      type: object
+      description: List of vehicle models.
+      properties:
+        models:
+          type: array
+          description: Array of vehicle models.
+          items:
+            $ref: '#/components/schemas/VehicleModel'
     YearList:
       type: object
       description: List of available vehicle model years.
@@ -206,24 +212,18 @@ components:
           type: string
           description: Model display name.
           example: F-150
-    ModelList:
+    Make:
       type: object
-      description: List of vehicle models.
+      description: A vehicle manufacturer.
       properties:
-        models:
-          type: array
-          description: Array of vehicle models.
-          items:
-            $ref: '#/components/schemas/VehicleModel'
-    MakeList:
-      type: object
-      description: List of vehicle makes.
-      properties:
-        makes:
-          type: array
-          description: Array of vehicle makes.
-          items:
-            $ref: '#/components/schemas/Make'
+        id:
+          type: string
+          description: Make identifier.
+          example: FORD
+        name:
+          type: string
+          description: Make display name.
+          example: Ford
   securitySchemes:
     apiKey:
       type: apiKey

@@ -117,48 +117,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
-    LoyaltyTransaction:
-      type: object
-      description: A Speed Perks points transaction.
-      properties:
-        id:
-          type: string
-          description: Transaction ID.
-          example: txn-001
-        type:
-          type: string
-          description: Transaction type.
-          enum:
-          - earn
-          - redeem
-          - expire
-          - adjust
-          example: earn
-        points:
-          type: integer
-          description: Points earned or redeemed.
-          example: 100
-        description:
-          type: string
-          description: Transaction description.
-          example: 'Purchase #order-001'
-        date:
-          type: string
-          format: date-time
-          description: Transaction date.
-          example: '2026-04-01T10:30:00Z'
     LoyaltyTransactionList:
       type: object
       description: List of loyalty transactions.
@@ -198,6 +156,48 @@ components:
           format: float
           description: Dollar value of available rewards.
           example: 5.0
+    LoyaltyTransaction:
+      type: object
+      description: A Speed Perks points transaction.
+      properties:
+        id:
+          type: string
+          description: Transaction ID.
+          example: txn-001
+        type:
+          type: string
+          description: Transaction type.
+          enum:
+          - earn
+          - redeem
+          - expire
+          - adjust
+          example: earn
+        points:
+          type: integer
+          description: Points earned or redeemed.
+          example: 100
+        description:
+          type: string
+          description: Transaction description.
+          example: 'Purchase #order-001'
+        date:
+          type: string
+          format: date-time
+          description: Transaction date.
+          example: '2026-04-01T10:30:00Z'
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
   securitySchemes:
     oauth2:
       type: oauth2

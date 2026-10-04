@@ -207,18 +207,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
     OrderInput:
       type: object
       description: Request to create a new order.
@@ -246,6 +234,31 @@ components:
           type: string
           description: Payment method identifier.
           example: pm-001
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    OrderList:
+      type: object
+      description: List of orders.
+      properties:
+        orders:
+          type: array
+          description: Array of orders.
+          items:
+            $ref: '#/components/schemas/Order'
+        total:
+          type: integer
+          description: Total number of orders.
+          example: 25
     CartItem:
       type: object
       description: An item in the shopping cart.
@@ -263,19 +276,6 @@ components:
           format: float
           description: Price per unit.
           example: 54.99
-    OrderList:
-      type: object
-      description: List of orders.
-      properties:
-        orders:
-          type: array
-          description: Array of orders.
-          items:
-            $ref: '#/components/schemas/Order'
-        total:
-          type: integer
-          description: Total number of orders.
-          example: 25
     Order:
       type: object
       description: A placed order.

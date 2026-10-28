@@ -1,4 +1,4 @@
-# Advance Auto Parts (advance-auto-parts)
+# Advance Auto Parts
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,97 +66,236 @@
 
 Advance Auto Parts is a leading automotive aftermarket parts retailer offering a comprehensive catalog of automotive parts, accessories, batteries, and maintenance items. The company serves both professional automotive technicians and do-it-yourself customers across North America through retail stores, online, and commercial delivery programs.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/advance-auto-parts/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/advance-auto-parts/refs/heads/main/apis.yml)
+**Areas:** Automotive · E-Commerce · Parts Catalog · Retail · Supply Chain · Fortune 500
 
-## Scope
+## Advance Auto Parts on APIs.io
 
-- **Type:** Index
+Everything profiled for Advance Auto Parts is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/advance-auto-parts/](https://apis.io/providers/advance-auto-parts/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Automotive
-- E-Commerce
-- Parts Catalog
-- Retail
-- Supply Chain
+- [Advance Auto Parts Cart API](https://apis.io/apis/advance-auto-parts/advance-auto-parts-cart-api/) — Shopping cart management
+- [Advance Auto Parts Inventory API](https://apis.io/apis/advance-auto-parts/advance-auto-parts-inventory-api/) — Store and warehouse inventory
+- [Advance Auto Parts Loyalty API](https://apis.io/apis/advance-auto-parts/advance-auto-parts-loyalty-api/) — Speed Perks loyalty program
+- [Advance Auto Parts Orders API](https://apis.io/apis/advance-auto-parts/advance-auto-parts-orders-api/) — Order placement and management
+- [Advance Auto Parts Products API](https://apis.io/apis/advance-auto-parts/advance-auto-parts-products-api/) — Parts and product catalog
+- [Advance Auto Parts Stores API](https://apis.io/apis/advance-auto-parts/advance-auto-parts-stores-api/) — Store locations and availability
+- [Advance Auto Parts Vehicles API](https://apis.io/apis/advance-auto-parts/advance-auto-parts-vehicles-api/) — Vehicle year/make/model lookup and fitment
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-04-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Advance Auto Parts Catalog API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Advance Auto Parts Catalog API provides programmatic access to the full product catalog including parts, accessories, batteries, and fluids. Supports vehicle fitment lookups by year/make/model/engine, part number searches, availability checks, pricing, and store inventory queries for professional and DIY customers.
+- [Advance Auto Parts Agentic Access](https://apis.io/agentic-access/advance-auto-parts/advance-auto-parts-agentic-access/)
 
-- **Human URL:** [https://www.advanceautoparts.com](https://www.advanceautoparts.com)
-- **Base URL:** `https://api.advanceautoparts.com/v1`
+#### JSON Schema (21)
 
-#### Tags
+The data models the API reads and writes.
 
-- Automotive
-- Parts Catalog
-- Inventory
-- Vehicle Fitment
+- [ErrorResponse](https://apis.io/schemas/advance-auto-parts/catalog-api-errorresponse/)
+- [InventoryResult](https://apis.io/schemas/advance-auto-parts/catalog-api-inventoryresult/)
+- [Make](https://apis.io/schemas/advance-auto-parts/catalog-api-make/)
+- [MakeList](https://apis.io/schemas/advance-auto-parts/catalog-api-makelist/)
+- [ModelList](https://apis.io/schemas/advance-auto-parts/catalog-api-modellist/)
+- [Product](https://apis.io/schemas/advance-auto-parts/catalog-api-product/)
+- [ProductList](https://apis.io/schemas/advance-auto-parts/catalog-api-productlist/)
+- [Store](https://apis.io/schemas/advance-auto-parts/catalog-api-store/)
+- [StoreInventory](https://apis.io/schemas/advance-auto-parts/catalog-api-storeinventory/)
+- [StoreList](https://apis.io/schemas/advance-auto-parts/catalog-api-storelist/)
+- [VehicleModel](https://apis.io/schemas/advance-auto-parts/catalog-api-vehiclemodel/)
+- [YearList](https://apis.io/schemas/advance-auto-parts/catalog-api-yearlist/)
+- [Cart](https://apis.io/schemas/advance-auto-parts/commerce-api-cart/)
+- [CartItem](https://apis.io/schemas/advance-auto-parts/commerce-api-cartitem/)
+- [CartItemInput](https://apis.io/schemas/advance-auto-parts/commerce-api-cartiteminput/)
+- [LoyaltyAccount](https://apis.io/schemas/advance-auto-parts/commerce-api-loyaltyaccount/)
+- [LoyaltyTransaction](https://apis.io/schemas/advance-auto-parts/commerce-api-loyaltytransaction/)
+- [LoyaltyTransactionList](https://apis.io/schemas/advance-auto-parts/commerce-api-loyaltytransactionlist/)
+- [Order](https://apis.io/schemas/advance-auto-parts/commerce-api-order/)
+- [OrderInput](https://apis.io/schemas/advance-auto-parts/commerce-api-orderinput/)
+- [OrderList](https://apis.io/schemas/advance-auto-parts/commerce-api-orderlist/)
 
-#### Properties
+#### JSON Structure (21)
 
-- [Documentation](https://www.advanceautoparts.com/i/policies/terms-and-conditions)
-- [OpenAPI](openapi/advance-auto-parts-catalog-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/advance-auto-parts-catalog-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/advance-auto-parts-catalog-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/)
-- [JSON-LD](json-ld/advance-auto-parts-catalog-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/advance-auto-parts-spectral-rules.yml)
-- [Vocabulary](vocabulary/advance-auto-parts-vocabulary.yaml)
+Data models expressed in JSON Structure.
 
-### Advance Auto Parts Commerce API
+- [Catalog Api Errorresponse Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-errorresponse-structure/)
+- [Catalog Api Inventoryresult Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-inventoryresult-structure/)
+- [Catalog Api Make Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-make-structure/)
+- [Catalog Api Makelist Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-makelist-structure/)
+- [Catalog Api Modellist Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-modellist-structure/)
+- [Catalog Api Product Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-product-structure/)
+- [Catalog Api Productlist Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-productlist-structure/)
+- [Catalog Api Store Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-store-structure/)
+- [Catalog Api Storeinventory Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-storeinventory-structure/)
+- [Catalog Api Storelist Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-storelist-structure/)
+- [Catalog Api Vehiclemodel Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-vehiclemodel-structure/)
+- [Catalog Api Yearlist Structure](https://apis.io/json-structure/advance-auto-parts/catalog-api-yearlist-structure/)
+- [Commerce Api Cart Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-cart-structure/)
+- [Commerce Api Cartitem Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-cartitem-structure/)
+- [Commerce Api Cartiteminput Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-cartiteminput-structure/)
+- [Commerce Api Loyaltyaccount Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-loyaltyaccount-structure/)
+- [Commerce Api Loyaltytransaction Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-loyaltytransaction-structure/)
+- [Commerce Api Loyaltytransactionlist Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-loyaltytransactionlist-structure/)
+- [Commerce Api Order Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-order-structure/)
+- [Commerce Api Orderinput Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-orderinput-structure/)
+- [Commerce Api Orderlist Structure](https://apis.io/json-structure/advance-auto-parts/commerce-api-orderlist-structure/)
 
-The Advance Auto Parts Commerce API enables ordering, cart management, loyalty program integration, and order fulfillment for commercial accounts. Supports creating orders, managing Speed Perks loyalty points, tracking shipments, and accessing purchase history for fleet and professional installer accounts.
+#### JSON-LD (2)
 
-- **Human URL:** [https://www.advanceautoparts.com/i/help/commercial-accounts](https://www.advanceautoparts.com/i/help/commercial-accounts)
-- **Base URL:** `https://api.advanceautoparts.com/commerce/v1`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Advance Auto Parts Catalog Api Context](https://apis.io/jsonld/advance-auto-parts/advance-auto-parts-catalog-api-context/)
+- [Advance Auto Parts Commerce Api Context](https://apis.io/jsonld/advance-auto-parts/advance-auto-parts-commerce-api-context/)
 
-- Automotive
-- E-Commerce
-- Loyalty
-- Order Management
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://www.advanceautoparts.com/i/help/commercial-accounts)
-- [OpenAPI](openapi/advance-auto-parts-commerce-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/advance-auto-parts-commerce-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/advance-auto-parts-commerce-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/)
-- [JSON-LD](json-ld/advance-auto-parts-commerce-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/advance-auto-parts-spectral-rules.yml)
-- [Vocabulary](vocabulary/advance-auto-parts-vocabulary.yaml)
+- [Advance Auto Parts Vocabulary](https://apis.io/vocabularies/advance-auto-parts/advance-auto-parts-vocabulary/)
 
-## Common Properties
+#### Examples (21)
 
-- [GitHub Organization](https://github.com/AdvanceAutoParts)
-- [LinkedIn](https://www.linkedin.com/company/advance-auto-parts)
+Example requests and responses.
+
+- [Catalog Api Errorresponse Example](https://apis.io/examples/advance-auto-parts/catalog-api-errorresponse-example/)
+- [Catalog Api Inventoryresult Example](https://apis.io/examples/advance-auto-parts/catalog-api-inventoryresult-example/)
+- [Catalog Api Make Example](https://apis.io/examples/advance-auto-parts/catalog-api-make-example/)
+- [Catalog Api Makelist Example](https://apis.io/examples/advance-auto-parts/catalog-api-makelist-example/)
+- [Catalog Api Modellist Example](https://apis.io/examples/advance-auto-parts/catalog-api-modellist-example/)
+- [Catalog Api Product Example](https://apis.io/examples/advance-auto-parts/catalog-api-product-example/)
+- [Catalog Api Productlist Example](https://apis.io/examples/advance-auto-parts/catalog-api-productlist-example/)
+- [Catalog Api Store Example](https://apis.io/examples/advance-auto-parts/catalog-api-store-example/)
+- [Catalog Api Storeinventory Example](https://apis.io/examples/advance-auto-parts/catalog-api-storeinventory-example/)
+- [Catalog Api Storelist Example](https://apis.io/examples/advance-auto-parts/catalog-api-storelist-example/)
+- [Catalog Api Vehiclemodel Example](https://apis.io/examples/advance-auto-parts/catalog-api-vehiclemodel-example/)
+- [Catalog Api Yearlist Example](https://apis.io/examples/advance-auto-parts/catalog-api-yearlist-example/)
+- [Commerce Api Cart Example](https://apis.io/examples/advance-auto-parts/commerce-api-cart-example/)
+- [Commerce Api Cartitem Example](https://apis.io/examples/advance-auto-parts/commerce-api-cartitem-example/)
+- [Commerce Api Cartiteminput Example](https://apis.io/examples/advance-auto-parts/commerce-api-cartiteminput-example/)
+- [Commerce Api Loyaltyaccount Example](https://apis.io/examples/advance-auto-parts/commerce-api-loyaltyaccount-example/)
+- [Commerce Api Loyaltytransaction Example](https://apis.io/examples/advance-auto-parts/commerce-api-loyaltytransaction-example/)
+- [Commerce Api Loyaltytransactionlist Example](https://apis.io/examples/advance-auto-parts/commerce-api-loyaltytransactionlist-example/)
+- [Commerce Api Order Example](https://apis.io/examples/advance-auto-parts/commerce-api-order-example/)
+- [Commerce Api Orderinput Example](https://apis.io/examples/advance-auto-parts/commerce-api-orderinput-example/)
+- [Commerce Api Orderlist Example](https://apis.io/examples/advance-auto-parts/commerce-api-orderlist-example/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Advance Auto Parts Catalog Cart API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-cart-api/)
+- [Advance Auto Parts Catalog API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-catalog-api/)
+- [Advance Auto Parts Commerce API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-commerce-api/)
+- [Advance Auto Parts Catalog Cart Inventory API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-inventory-api/)
+- [Advance Auto Parts Catalog Cart Loyalty API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-loyalty-api/)
+- [Advance Auto Parts Catalog Cart Orders API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-orders-api/)
+- [Advance Auto Parts Catalog Cart Products API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-products-api/)
+- [Advance Auto Parts Catalog Cart Stores API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-stores-api/)
+- [Advance Auto Parts Catalog Cart Vehicles API](https://apis.io/collections/advance-auto-parts/open-advance-auto-parts-vehicles-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Advance Auto Parts — jsonschema rules](https://apis.io/rules/advance-auto-parts/advance-auto-parts-jsonschema-spectral-rules/)
+- [Advance Auto Parts API Rules](https://apis.io/rules/advance-auto-parts/advance-auto-parts-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Advance Auto Parts Authentication](https://apis.io/security/advance-auto-parts/advance-auto-parts-authentication/)
+- [Advance Auto Parts Domain Security](https://apis.io/security/advance-auto-parts/advance-auto-parts-domain-security/)
+- [Advance Auto Parts Vulnerability Disclosure](https://apis.io/security/advance-auto-parts/advance-auto-parts-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Advance Auto Parts Scopes](https://apis.io/scopes/advance-auto-parts/advance-auto-parts-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Advance Auto Parts Plans Pricing](https://apis.io/plans/advance-auto-parts/advance-auto-parts-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Advance Auto Parts Rate Limits](https://apis.io/rate-limits/advance-auto-parts/advance-auto-parts-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Advance Auto Parts Finops](https://apis.io/finops/advance-auto-parts/advance-auto-parts-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.advanceautoparts.com)
-- [Portal](https://www.advanceautoparts.com/i/help)
 - [Support](https://www.advanceautoparts.com/i/help/customer-service)
 - [Blog](https://www.advanceautoparts.com/gearhead)
-- [Terms of Service](https://www.advanceautoparts.com/i/policies/terms-and-conditions)
-- [Privacy Policy](https://www.advanceautoparts.com/i/policies/privacy)
-- [Login](https://www.advanceautoparts.com/myaccount/login)
-- [Sign Up](https://www.advanceautoparts.com/myaccount/register)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
+- [Terms of service](https://www.advanceautoparts.com/i/policies/terms-and-conditions)
+- [Privacy policy](https://www.advanceautoparts.com/i/policies/privacy)
+- [GitHub](https://github.com/AdvanceAutoParts)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 41.5** — developing · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 62.3 |
+| Contract governance | 27.3 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 22.4 |
+
+**Agent readiness 36.6** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 36.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/advance-auto-parts/](https://apis.io/providers/advance-auto-parts/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Advance Auto Parts: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/advance-auto-parts/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).

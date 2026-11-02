@@ -1,0 +1,60 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Advance Auto Parts
+providerId: advance-auto-parts
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: false
+notes: Advance Auto Parts does not publish a public developer API or self-service pricing.
+  Catalog/commerce integrations are negotiated through B2B partnerships.
+tags:
+  - Automotive
+  - E-Commerce
+  - Parts Catalog
+  - Retail
+description: No public developer API or pricing page is available for Advance Auto Parts. Catalog,
+  inventory, and commerce integrations are handled via B2B partnerships and EDI; pricing is
+  custom per agreement.
+sources:
+  - https://shop.advanceautoparts.com/
+plans:
+  - id: advance-auto-parts-partner
+    name: B2B Partner
+    type: enterprise
+    description: Custom B2B integration for catalog, inventory, or commerce data; pricing per
+      agreement.
+    entries:
+      - label: Partner contract
+        name: custom
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: month
+        geo: US
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Catalog data feed
+      - name: Inventory access
+      - name: Commerce integration
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - negotiated
+  plans:
+  - name: B2B Partner
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - month
